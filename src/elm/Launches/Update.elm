@@ -1,7 +1,7 @@
-module Launch.Update exposing (..)
+module Launches.Update exposing (..)
 
-import Launch.Models exposing (Launches)
-import Launch.Messages exposing (Msg(..))
+import Launches.Models exposing (Launches)
+import Launches.Messages exposing (Msg(..))
 
 
 update : Msg -> Launches -> ( Launches, Cmd Msg )

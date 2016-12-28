@@ -1,4 +1,4 @@
-module Launch.Models exposing (..)
+module Launches.Models exposing (..)
 
 
 type alias Launch =

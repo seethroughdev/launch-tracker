@@ -6,12 +6,14 @@ import UrlParser exposing (..)
 
 type Route
     = NotFoundRoute
+    | LaunchesRoute
 
 
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        []
+        [ map LaunchesRoute top
+        ]
 
 
 parseLocation : Location -> Route

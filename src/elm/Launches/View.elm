@@ -21,3 +21,19 @@ listView launches =
         , ul []
             (List.map listLaunch launches)
         ]
+
+
+launchView : Maybe Launch -> Html Msg
+launchView launch =
+    div []
+        [ h4 [] [ text "Launcheroni" ]
+        , text (toString launch)
+        ]
+
+
+view : Launches -> Maybe Launch -> Html Msg
+view launches launch =
+    main_ []
+        [ listView launches
+        , launchView launch
+        ]

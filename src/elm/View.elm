@@ -4,7 +4,7 @@ import Routes exposing (Route(..))
 import Html exposing (..)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
-import Launches.View exposing (listView)
+import Launches.View
 
 
 view : Model -> Html Msg
@@ -18,7 +18,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         LaunchesRoute ->
-            Html.map LaunchesMsg (listView model.launches)
+            Html.map LaunchesMsg (Launches.View.view model.launches (List.head model.launches))
 
         NotFoundRoute ->
             notFoundView

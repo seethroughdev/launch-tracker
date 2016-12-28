@@ -1,0 +1,31 @@
+/*  COLORS  */
+
+$backgroundColor: #333;
+
+
+/*  TYPE */
+
+$fontFamily: 'Helvetica Neue', Helvetica, Arial, serif;
+$fontWeight: 200;
+$fontColor: #fff;
+$fontSize: 14px;
+$fontSize-mobile: 15px;
+$fontSize-wide: 15px;
+$fontWeightLight: 200;
+$fontWeight-normal: 300;
+$fontWeightSemi: 400;
+$fontWeight-bold: 700;
+$fontLineHeight: 1.5;
+$font: $fontWeight-normal $fontSize-mobile/$fontLineHeight $fontFamily;
+
+
+/* MQ */
+
+$small: 481px;
+$medium: 769px;
+$large: 1181px;
+$wide: 1441px;
+
+
+/* ANIMATION */
+$animation: 300ms ease-out;

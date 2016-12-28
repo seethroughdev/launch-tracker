@@ -1,0 +1,49 @@
+{
+  "name": "elm-boilerplate",
+  "version": "0.0.10",
+  "description": "My Elm/PostCSS/Webpack boilerplate",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seethroughtrees/elm-boilerplate.git"
+  },
+  "author": "seethroughtrees <seethroughtrees+npm@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seethroughtrees/elm-boilerplate/issues"
+  },
+  "homepage": "https://github.com/seethroughtrees/elm-boilerplate#readme",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline --content-base src/",
+    "clean": "./node_modules/.bin/rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "webpack --env.prod -p",
+    "presetup": "rm -rf node_modules && rm -rf elm_stuff",
+    "setup": "yarn install && elm package install -y"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.1",
+    "css-mqpacker": "^5.0.1",
+    "elm": "^0.18.0",
+    "elm-hot-loader": "^0.5.2",
+    "elm-webpack-loader": "^4.1.1",
+    "extract-text-webpack-plugin": "beta",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.17.0",
+    "json-server": "^0.9.4",
+    "lost": "^7.1.1",
+    "postcss-compact-mq": "^0.2.1",
+    "postcss-cssnext": "^2.9.0",
+    "postcss-loader": "^1.1.1",
+    "postcss-reporter": "^3.0.0",
+    "postcss-simple-vars": "^3.0.0",
+    "postcss-smart-import": "^0.6.6",
+    "rimraf": "^2.5.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "beta",
+    "webpack-dev-server": "beta",
+    "webpack-merge": "^2.0.0"
+  }
+}

@@ -1,0 +1,15 @@
+/* MEDIA QUERIES */
+
+@breakpoints {
+  mobile: $small;
+  tablet: $medium;
+  desktop: $large;
+  wide: $wide;
+}
+
+@media-queries {
+  mobile: >mobile;
+  tablet: >tablet;
+  desktop: >desktop;
+  wide: >wide;
+}

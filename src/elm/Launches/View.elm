@@ -2,13 +2,14 @@ module Launches.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch)
 
 
 listLaunch : Launch -> Html Msg
 listLaunch launch =
-    li []
+    li [ onClick (SetCurrentLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
         , p [] [ text launch.date ]
@@ -44,18 +45,7 @@ launchView : Launches -> Html Msg
 launchView launches =
     case launches.currentLaunch of
         Just value ->
-            let
-                d =
-                    launches.data
-                        |> List.filter (\u -> u.id == value)
-                        |> List.head
-            in
-                case d of
-                    Just value ->
-                        renderLaunch value
-
-                    Nothing ->
-                        renderNoLaunch
+            renderLaunch value
 
         Nothing ->
             div []

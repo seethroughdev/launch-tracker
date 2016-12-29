@@ -16,6 +16,7 @@ type alias Location =
     }
 
 
+initLocation : Location
 initLocation =
     { id = 0
     , name = ""
@@ -46,14 +47,14 @@ initLaunch =
 
 type alias Launches =
     { data : List Launch
-    , currentLaunch : Maybe LaunchId
+    , currentLaunch : Maybe Launch
     , launchQuery : String
     }
 
 
 initLaunches : Launches
 initLaunches =
-    Launches tempLaunches (Just 767) ""
+    Launches tempLaunches (Just initLaunch) ""
 
 
 tempLaunches : List Launch
@@ -75,6 +76,7 @@ tempLaunches =
     ]
 
 
+tempLocation1 : Location
 tempLocation1 =
     { id = 124
     , name = "Onenui Station, Mahia Peninsula, New Zealand"
@@ -82,6 +84,7 @@ tempLocation1 =
     }
 
 
+tempLocation2 : Location
 tempLocation2 =
     { id = 40
     , name = "Vandenberg AFB, CA, USA"

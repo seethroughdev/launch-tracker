@@ -5,7 +5,7 @@ $backgroundColor: #333;
 
 /*  TYPE */
 
-$fontFamily: 'Helvetica Neue', Helvetica, Arial, serif;
+$fontFamily: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, serif;
 $fontWeight: 200;
 $fontColor: #fff;
 $fontSize: 14px;
@@ -16,7 +16,7 @@ $fontWeight-normal: 300;
 $fontWeightSemi: 400;
 $fontWeight-bold: 700;
 $fontLineHeight: 1.5;
-$font: $fontWeight-normal $fontSize-mobile/$fontLineHeight $fontFamily;
+$font: $fontWeight $fontSize-mobile/$fontLineHeight $fontFamily;
 
 
 /* MQ */

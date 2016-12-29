@@ -9,7 +9,10 @@ html {
 html, body {
   background: $backgroundColor;
   color: white;
-  font: $font;
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: 1.5;
   margin: 0;
   padding: 0;
   font-smoothing: antialiased !important;
@@ -19,6 +22,10 @@ html, body {
   touch-action: manipulation !important;
 }
 
-h1 {
+h1, h2, h3, h4 {
   font-weight: $fontWeightLight;
+}
+
+ul {
+  padding-left: 0;
 }

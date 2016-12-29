@@ -2,6 +2,7 @@ module.exports = {
   plugins: [
     require('postcss-smart-import')(),
     require('postcss-simple-vars')(),
+    require('postcss-nesting')(),
     require('postcss-compact-mq')(),
     require('postcss-cssnext')(),
     require('lost')(),

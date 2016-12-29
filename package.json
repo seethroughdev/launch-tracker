@@ -36,6 +36,7 @@
     "postcss-compact-mq": "^0.2.1",
     "postcss-cssnext": "^2.9.0",
     "postcss-loader": "^1.1.1",
+    "postcss-nesting": "^2.3.1",
     "postcss-reporter": "^3.0.0",
     "postcss-simple-vars": "^3.0.0",
     "postcss-smart-import": "^0.6.6",

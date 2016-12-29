@@ -1,6 +1,7 @@
 module Launches.View exposing (..)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch)
 
@@ -16,7 +17,7 @@ listLaunch launch =
 
 listView : Launches -> Html Msg
 listView launches =
-    div []
+    aside [ class "aside" ]
         [ h3 [] [ text "Upcoming Launches" ]
         , ul []
             (List.map listLaunch launches)
@@ -25,15 +26,17 @@ listView launches =
 
 launchView : Maybe Launch -> Html Msg
 launchView launch =
-    div []
-        [ h4 [] [ text "Launcheroni" ]
-        , text (toString launch)
+    main_ [ class "main" ]
+        [ div []
+            [ h4 [] [ text "Launcheroni" ]
+            , text (toString launch)
+            ]
         ]
 
 
 view : Launches -> Maybe Launch -> Html Msg
 view launches launch =
-    main_ []
+    div [ class "mainContainer" ]
         [ listView launches
         , launchView launch
         ]

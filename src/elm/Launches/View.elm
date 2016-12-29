@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Launches.Messages exposing (Msg(..))
-import Launches.Models exposing (Launches, Launch)
+import Launches.Models exposing (Launches, Launch, LaunchId)
 
 
 listLaunch : Launch -> Html Msg
@@ -53,8 +53,8 @@ launchView launches =
                 ]
 
 
-view : Launches -> Html Msg
-view model =
+view : Launches -> Maybe LaunchId -> Html Msg
+view model launchId =
     div [ class "mainContainer" ]
         [ listView model
         , main_ [ class "main" ]

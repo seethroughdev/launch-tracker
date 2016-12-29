@@ -54,7 +54,7 @@ type alias Launches =
 
 initLaunches : Launches
 initLaunches =
-    Launches tempLaunches (Just initLaunch) ""
+    Launches tempLaunches Nothing ""
 
 
 tempLaunches : List Launch

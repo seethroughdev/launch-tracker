@@ -18,7 +18,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         LaunchesRoute ->
-            Html.map LaunchesMsg (Launches.View.view model.launches (List.head model.launches))
+            Html.map LaunchesMsg (Launches.View.view model.launches)
 
         NotFoundRoute ->
             notFoundView

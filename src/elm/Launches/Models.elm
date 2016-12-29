@@ -45,12 +45,15 @@ initLaunch =
 
 
 type alias Launches =
-    List Launch
+    { data : List Launch
+    , currentLaunch : Maybe LaunchId
+    , launchQuery : String
+    }
 
 
 initLaunches : Launches
 initLaunches =
-    []
+    Launches tempLaunches (Just 767) ""
 
 
 tempLaunches : List Launch

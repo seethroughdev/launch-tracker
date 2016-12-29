@@ -13,5 +13,5 @@ type alias Model =
 initialModel : Routes.Route -> Model
 initialModel route =
     { route = route
-    , launches = tempLaunches
+    , launches = initLaunches
     }

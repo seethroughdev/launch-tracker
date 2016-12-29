@@ -20,7 +20,7 @@ listView launches =
     aside [ class "aside" ]
         [ h3 [] [ text "Upcoming Launches" ]
         , ul []
-            (List.map listLaunch launches)
+            (List.map listLaunch launches.data)
         ]
 
 
@@ -33,11 +33,29 @@ renderLaunch launch =
         ]
 
 
-launchView : Maybe Launch -> Html Msg
-launchView launch =
-    case launch of
+renderNoLaunch : Html Msg
+renderNoLaunch =
+    div []
+        [ text "That launch no longer exists, try another"
+        ]
+
+
+launchView : Launches -> Html Msg
+launchView launches =
+    case launches.currentLaunch of
         Just value ->
-            renderLaunch value
+            let
+                d =
+                    launches.data
+                        |> List.filter (\u -> u.id == value)
+                        |> List.head
+            in
+                case d of
+                    Just value ->
+                        renderLaunch value
+
+                    Nothing ->
+                        renderNoLaunch
 
         Nothing ->
             div []
@@ -45,11 +63,11 @@ launchView launch =
                 ]
 
 
-view : Launches -> Maybe Launch -> Html Msg
-view launches launch =
+view : Launches -> Html Msg
+view model =
     div [ class "mainContainer" ]
-        [ listView launches
+        [ listView model
         , main_ [ class "main" ]
-            [ launchView launch
+            [ launchView model
             ]
         ]

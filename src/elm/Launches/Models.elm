@@ -90,3 +90,29 @@ tempLocation2 =
     , name = "Vandenberg AFB, CA, USA"
     , countryCode = "USA"
     }
+
+
+
+-- RESPONSES
+
+
+type alias LaunchResponse =
+    { id : Int
+    , name : String
+    , isoStart : String
+    , status : Int
+    , location : LocationResponse
+    , missions : List MissionResponse
+    }
+
+
+type alias MissionResponse =
+    { description : String
+    }
+
+
+type alias LocationResponse =
+    { id : Int
+    , name : String
+    , countryCode : String
+    }

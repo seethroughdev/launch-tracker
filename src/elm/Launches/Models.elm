@@ -1,8 +1,16 @@
 module Launches.Models exposing (..)
 
 
+type alias LocationId =
+    Int
+
+
+type alias LaunchId =
+    Int
+
+
 type alias Location =
-    { id : Int
+    { id : LocationId
     , name : String
     , countryCode : String
     }
@@ -16,7 +24,7 @@ initLocation =
 
 
 type alias Launch =
-    { id : Int
+    { id : LaunchId
     , name : String
     , date : String
     , status : Int

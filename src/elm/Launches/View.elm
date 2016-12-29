@@ -24,19 +24,32 @@ listView launches =
         ]
 
 
+renderLaunch : Launch -> Html Msg
+renderLaunch launch =
+    div []
+        [ h4 [] [ text "Launch" ]
+        , h1 [] [ text launch.name ]
+        , text (toString launch)
+        ]
+
+
 launchView : Maybe Launch -> Html Msg
 launchView launch =
-    main_ [ class "main" ]
-        [ div []
-            [ h4 [] [ text "Launcheroni" ]
-            , text (toString launch)
-            ]
-        ]
+    case launch of
+        Just value ->
+            renderLaunch value
+
+        Nothing ->
+            div []
+                [ text "Loading Launch"
+                ]
 
 
 view : Launches -> Maybe Launch -> Html Msg
 view launches launch =
     div [ class "mainContainer" ]
         [ listView launches
-        , launchView launch
+        , main_ [ class "main" ]
+            [ launchView launch
+            ]
         ]

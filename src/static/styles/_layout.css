@@ -1,0 +1,24 @@
+.mainContainer {
+  lost-utility: clearfix;
+  min-height: 100vh;
+}
+
+aside.aside {
+  padding: 2rem;
+  @media tablet {
+    lost-column: 1/4
+  }
+}
+
+main.main {
+  padding: 2rem;
+  text-align: center;
+  lost-center: middle-center;
+  & > div {
+    max-width: $medium;
+    margin: 0 auto;
+  }
+  @media tablet {
+    lost-column: 3/4
+  }
+}

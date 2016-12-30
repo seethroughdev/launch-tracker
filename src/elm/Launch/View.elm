@@ -1,1 +1,0 @@
-module Launch.View exposing (..)

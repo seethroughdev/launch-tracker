@@ -1,6 +1,6 @@
 module Models exposing (..)
 
-import Launch.Models exposing (..)
+import Launches.Models exposing (..)
 import Routes
 
 

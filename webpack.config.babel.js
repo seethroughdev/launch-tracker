@@ -35,7 +35,6 @@ const config = (env = {}) => {
 
     devServer: {
       historyApiFallback: true,
-      quiet: true
     },
 
     plugins: [

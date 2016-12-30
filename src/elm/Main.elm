@@ -4,6 +4,7 @@ import Navigation exposing (Location, program)
 import Routes exposing (parseLocation)
 import Messages exposing (Msg(..))
 import Models exposing (Model, initialModel)
+import Launches.Commands exposing (fetchAll)
 import Update exposing (update)
 import View exposing (view)
 
@@ -14,7 +15,7 @@ init location =
         currentRoute =
             Routes.parseLocation location
     in
-        ( initialModel currentRoute, Cmd.none )
+        ( initialModel currentRoute, Cmd.map LaunchesMsg fetchAll )
 
 
 subscriptions : Model -> Sub Msg

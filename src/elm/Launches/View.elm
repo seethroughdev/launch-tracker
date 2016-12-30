@@ -2,10 +2,6 @@ module Launches.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
-
--- import Html.Events exposing (onClick)
-
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
@@ -13,7 +9,6 @@ import RemoteData exposing (..)
 
 listLaunch : Launch -> Html Msg
 listLaunch launch =
-    -- li [ onClick (SetCurrentLaunch launch.id) ]
     li []
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
@@ -25,7 +20,7 @@ renderListLaunch : WebData (List Launch) -> Html Msg
 renderListLaunch data =
     case data of
         NotAsked ->
-            li [] [ text "Not Asked" ]
+            li [] []
 
         Loading ->
             li [] [ text "Loading" ]

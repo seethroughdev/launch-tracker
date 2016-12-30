@@ -28,7 +28,7 @@ type alias Launches =
 
 initLaunches : Launches
 initLaunches =
-    Launches NotAsked Nothing ""
+    Launches Loading Nothing ""
 
 
 

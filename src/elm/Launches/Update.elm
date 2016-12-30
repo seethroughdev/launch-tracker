@@ -5,14 +5,6 @@ import RemoteData exposing (..)
 import Launches.Models exposing (..)
 
 
---
--- getCurrentLaunch : LaunchId -> WebData (List LaunchReponse) -> Maybe LaunchReponse
--- getCurrentLaunch launchId launches =
---     launches
---         |> List.filter (\u -> u.id == launchId)
---         |> List.head
-
-
 getCurrentLaunch : LaunchId -> WebData (List Launch) -> Maybe Launch
 getCurrentLaunch launchId launches =
     case launches of
@@ -48,36 +40,3 @@ update msg model =
                   }
                 , Cmd.none
                 )
-
-
-
--- case msg of
--- SetCurrentLaunch launchId ->
---     let
---         d =
---             getCurrentLaunch launchId model.data
---     in
---         case d of
---             Just value ->
---                 ( { model | currentLaunch = d }, Cmd.none )
---
---             Nothing ->
---                 ( model, Cmd.none )
--- OnFetchAll (Ok resp) ->
---     let
---         launches =
---             List.map createLaunch resp
---
---         currentLaunch =
---             getCurrentLaunch 879 launches
---     in
---         ( { model
---             | data = launches
---             , currentLaunch = currentLaunch
---           }
---         , Cmd.none
---         )
---
--- OnFetchAll (Err error) ->
---     Debug.log (toString error)
---         ( model, Cmd.none )

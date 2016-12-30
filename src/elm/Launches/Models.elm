@@ -1,5 +1,7 @@
 module Launches.Models exposing (..)
 
+import RemoteData exposing (..)
+
 
 type alias LocationId =
     Int
@@ -7,13 +9,6 @@ type alias LocationId =
 
 type alias LaunchId =
     Int
-
-
-type alias Location =
-    { id : LocationId
-    , name : String
-    , countryCode : String
-    }
 
 
 initLocation : Location
@@ -24,29 +19,8 @@ initLocation =
     }
 
 
-type alias Launch =
-    { id : LaunchId
-    , name : String
-    , date : String
-    , status : Int
-    , location : Location
-    , description : String
-    }
-
-
-initLaunch : Launch
-initLaunch =
-    { id = 0
-    , name = ""
-    , date = ""
-    , status = 0
-    , location = initLocation
-    , description = ""
-    }
-
-
 type alias Launches =
-    { data : List Launch
+    { data : WebData (List Launch)
     , currentLaunch : Maybe Launch
     , launchQuery : String
     }
@@ -54,64 +28,29 @@ type alias Launches =
 
 initLaunches : Launches
 initLaunches =
-    Launches tempLaunches Nothing ""
-
-
-tempLaunches : List Launch
-tempLaunches =
-    [ { id = 767
-      , name = "Atlas V 401 | NROL-79"
-      , date = "20170120T000000Z"
-      , status = 2
-      , location = tempLocation1
-      , description = "Iridium NEXT is a second-generation worldwide network of telecommunications satellites to eventually replace the old Iridium constellation. These satellites will incorporate features such as data transmission which were not emphasized in the original design."
-      }
-    , { id = 879
-      , name = "Falcon 9 Full Thrust | 10 x Iridium NEXT (1-10)"
-      , date = "20170105T203600Z"
-      , status = 2
-      , location = tempLocation2
-      , description = "his is the first test flight of the Electron rocket. Built and operated by Rocket Lab, Electron is meant to offer low-price launches for the small-sat market."
-      }
-    ]
-
-
-tempLocation1 : Location
-tempLocation1 =
-    { id = 124
-    , name = "Onenui Station, Mahia Peninsula, New Zealand"
-    , countryCode = "NZL"
-    }
-
-
-tempLocation2 : Location
-tempLocation2 =
-    { id = 40
-    , name = "Vandenberg AFB, CA, USA"
-    , countryCode = "USA"
-    }
+    Launches NotAsked Nothing ""
 
 
 
 -- RESPONSES
 
 
-type alias LaunchResponse =
-    { id : Int
+type alias Launch =
+    { id : LaunchId
     , name : String
     , isoStart : String
     , status : Int
-    , location : LocationResponse
-    , missions : List MissionResponse
+    , location : Location
+    , missions : List Mission
     }
 
 
-type alias MissionResponse =
+type alias Mission =
     { description : String
     }
 
 
-type alias LocationResponse =
+type alias Location =
     { id : Int
     , name : String
     , countryCode : String

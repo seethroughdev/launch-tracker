@@ -1,9 +1,8 @@
 module Launches.Messages exposing (..)
 
-import Http
-import Launches.Models exposing (LaunchId, LaunchResponse)
+import Launches.Models exposing (Launch)
+import RemoteData
 
 
 type Msg
-    = SetCurrentLaunch LaunchId
-    | OnFetchAll (Result Http.Error (List LaunchResponse))
+    = LaunchesResponse (RemoteData.WebData (List Launch))

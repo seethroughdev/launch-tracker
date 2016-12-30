@@ -2,26 +2,47 @@ module Launches.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+
+
+-- import Html.Events exposing (onClick)
+
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
+import RemoteData exposing (..)
 
 
 listLaunch : Launch -> Html Msg
 listLaunch launch =
-    li [ onClick (SetCurrentLaunch launch.id) ]
+    -- li [ onClick (SetCurrentLaunch launch.id) ]
+    li []
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
-        , p [] [ text launch.date ]
+          -- , p [] [ text launch.date ]
         ]
+
+
+renderListLaunch : WebData (List Launch) -> Html Msg
+renderListLaunch data =
+    case data of
+        NotAsked ->
+            li [] [ text "Not Asked" ]
+
+        Loading ->
+            li [] [ text "Loading" ]
+
+        Failure e ->
+            li [] [ text (toString e) ]
+
+        Success data ->
+            ul []
+                (List.map listLaunch data)
 
 
 listView : Launches -> Html Msg
 listView launches =
     aside [ class "aside" ]
         [ h3 [] [ text "Upcoming Launches" ]
-        , ul []
-            (List.map listLaunch launches.data)
+        , renderListLaunch launches.data
         ]
 
 
@@ -49,7 +70,8 @@ launchView launches =
 
         Nothing ->
             div []
-                [ text "Loading Launch"
+                [ h4 [] [ text "Launch" ]
+                , text "Loading Launch"
                 ]
 
 

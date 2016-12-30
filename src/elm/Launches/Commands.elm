@@ -3,7 +3,8 @@ module Launches.Commands exposing (..)
 import Http
 import Json.Decode as Json exposing (..)
 import Json.Decode.Pipeline exposing (decode, required, optional, requiredAt)
-import Launches.Models exposing (MissionResponse, LaunchResponse, LocationResponse)
+import Launches.Models exposing (Mission, Launch, Location)
+import RemoteData
 
 
 -- import Launches.Models exposing (..)
@@ -14,7 +15,8 @@ import Launches.Messages exposing (Msg(..))
 fetchAll : Cmd Msg
 fetchAll =
     Http.get fetchAllUrl collectionDecoder
-        |> Http.send OnFetchAll
+        |> RemoteData.sendRequest
+        |> Cmd.map LaunchesResponse
 
 
 fetchAllUrl : String
@@ -22,19 +24,19 @@ fetchAllUrl =
     "https://launchlibrary.net/1.2/launch/next/25"
 
 
-collectionDecoder : Json.Decoder (List LaunchResponse)
+collectionDecoder : Json.Decoder (List Launch)
 collectionDecoder =
     at [ "launches" ] launchesDecoder
 
 
-launchesDecoder : Decoder (List LaunchResponse)
+launchesDecoder : Decoder (List Launch)
 launchesDecoder =
     Json.list launchDecoder
 
 
-launchDecoder : Json.Decoder LaunchResponse
+launchDecoder : Json.Decoder Launch
 launchDecoder =
-    decode LaunchResponse
+    decode Launch
         |> required "id" int
         |> required "name" string
         |> required "isostart" string
@@ -43,15 +45,15 @@ launchDecoder =
         |> required "missions" (list missionDecoder)
 
 
-missionDecoder : Json.Decoder MissionResponse
+missionDecoder : Json.Decoder Mission
 missionDecoder =
-    decode MissionResponse
+    decode Mission
         |> required "description" string
 
 
-locationDecoder : Json.Decoder LocationResponse
+locationDecoder : Json.Decoder Location
 locationDecoder =
-    decode LocationResponse
+    decode Location
         |> required "id" int
         |> required "name" string
         |> required "countryCode" string

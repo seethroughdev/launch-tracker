@@ -7,12 +7,32 @@ import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
 
 
+-- import Date exposing (Month(..))
+
+import Date.Extra as Date
+
+
+renderLaunchDate : String -> Html Msg
+renderLaunchDate d =
+    case Date.fromIsoString d of
+        Nothing ->
+            text "No date"
+
+        Just dateString ->
+            let
+                formattedDate =
+                    dateString
+                        |> Date.toFormattedString "EEEE, MMMM d, y 'at' h:mm a"
+            in
+                text formattedDate
+
+
 listLaunch : Launch -> Html Msg
 listLaunch launch =
     li []
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
-          -- , p [] [ text launch.date ]
+        , p [] [ renderLaunchDate launch.isoStart ]
         ]
 
 

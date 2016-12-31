@@ -2,6 +2,7 @@ module View exposing (..)
 
 import Routes exposing (Route(..))
 import Html exposing (..)
+import Html.Events exposing (onClick)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Launches.View
@@ -29,6 +30,6 @@ page model =
 
 notFoundView : Html Msg
 notFoundView =
-    div []
+    div [ onClick (GoTo LaunchesRoute) ]
         [ h3 [] [ text "Hello world" ]
         ]

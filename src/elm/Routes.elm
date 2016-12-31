@@ -28,3 +28,16 @@ parseLocation location =
 
         Nothing ->
             NotFoundRoute
+
+
+locationToString : Route -> String
+locationToString location =
+    case location of
+        LaunchesRoute ->
+            "/#launches"
+
+        LaunchRoute launchId ->
+            "/#launches/" ++ (toString launchId)
+
+        NotFoundRoute ->
+            "404.html"

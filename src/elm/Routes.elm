@@ -1,14 +1,14 @@
 module Routes exposing (..)
 
 import Navigation exposing (Location)
-import UrlParser exposing (..)
 import Launches.Models exposing (LaunchId)
+import UrlParser exposing (..)
 
 
 type Route
-    = NotFoundRoute
+    = LaunchesRoute
     | LaunchRoute LaunchId
-    | LaunchesRoute
+    | NotFoundRoute
 
 
 matchers : Parser (Route -> a) a

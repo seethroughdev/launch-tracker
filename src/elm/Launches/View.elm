@@ -2,6 +2,7 @@ module Launches.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
@@ -29,10 +30,11 @@ renderLaunchDate d =
 
 listLaunch : Launch -> Html Msg
 listLaunch launch =
-    li []
+    li [ onClick (ShowLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
         , p [] [ renderLaunchDate launch.isoStart ]
+        , p [] [ text (toString launch.id) ]
         ]
 
 
@@ -61,10 +63,19 @@ listView launches =
         ]
 
 
+renderNavButtons : Launch -> Html Msg
+renderNavButtons launch =
+    div []
+        [ button [ onClick (ShowPrevLaunch launch.id) ] [ text "Prev" ]
+        , button [ onClick (ShowNextLaunch launch.id) ] [ text "Next" ]
+        ]
+
+
 renderLaunch : Launch -> Html Msg
 renderLaunch launch =
     div []
         [ h4 [] [ text "Launch" ]
+        , renderNavButtons launch
         , h1 [] [ text launch.name ]
         , text (toString launch)
         ]
@@ -77,9 +88,9 @@ renderNoLaunch =
         ]
 
 
-launchView : Launches -> Html Msg
-launchView launches =
-    case launches.currentLaunch of
+launchView : Maybe Launch -> Html Msg
+launchView launch =
+    case launch of
         Just value ->
             renderLaunch value
 
@@ -90,11 +101,12 @@ launchView launches =
                 ]
 
 
-view : Launches -> Maybe LaunchId -> Html Msg
-view model launchId =
+view : Launches -> Maybe Launch -> Html Msg
+view model launch =
     div [ class "mainContainer" ]
         [ listView model
         , main_ [ class "main" ]
-            [ launchView model
+            [ launchView launch
+            , button [ onClick ShowLaunches ] [ text "Show em!" ]
             ]
         ]

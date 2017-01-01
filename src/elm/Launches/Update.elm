@@ -3,6 +3,56 @@ module Launches.Update exposing (..)
 import Launches.Messages exposing (Msg(..))
 import RemoteData exposing (..)
 import Launches.Models exposing (..)
+import Navigation
+import List.Extra as List
+
+
+-- import Routes exposing (Route(..), locationToString)
+
+
+getOffsetId : Int -> LaunchId -> WebData (List Launch) -> Maybe LaunchId
+getOffsetId offset id launches =
+    case launches of
+        NotAsked ->
+            Nothing
+
+        Loading ->
+            Nothing
+
+        Failure e ->
+            Nothing
+
+        Success data ->
+            let
+                newIndex =
+                    List.findIndex (\l -> l.id == id) data
+
+                len =
+                    List.length data
+
+                headItem =
+                    List.head data
+            in
+                case newIndex of
+                    Nothing ->
+                        Nothing
+
+                    Just i ->
+                        let
+                            d =
+                                List.getAt (i + offset) data
+                        in
+                            case d of
+                                Nothing ->
+                                    case headItem of
+                                        Nothing ->
+                                            Nothing
+
+                                        Just item ->
+                                            Just item.id
+
+                                Just item ->
+                                    Just item.id
 
 
 getCurrentLaunch : LaunchId -> WebData (List Launch) -> Maybe Launch
@@ -36,7 +86,36 @@ update msg model =
             in
                 ( { model
                     | data = response
-                    , currentLaunch = currentLaunch
                   }
                 , Cmd.none
                 )
+
+        ShowLaunches ->
+            ( model, Navigation.newUrl "#launches" )
+
+        ShowLaunch id ->
+            ( model, Navigation.newUrl ("#launches/" ++ toString id) )
+
+        ShowNextLaunch id ->
+            let
+                nextId =
+                    getOffsetId 1 id model.data
+            in
+                case nextId of
+                    Nothing ->
+                        ( model, Cmd.none )
+
+                    Just val ->
+                        ( model, Navigation.newUrl ("#launches/" ++ toString val) )
+
+        ShowPrevLaunch id ->
+            let
+                nextId =
+                    getOffsetId -1 id model.data
+            in
+                case nextId of
+                    Nothing ->
+                        ( model, Cmd.none )
+
+                    Just val ->
+                        ( model, Navigation.newUrl ("#launches/" ++ toString val) )

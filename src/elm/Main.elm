@@ -1,10 +1,10 @@
 module Main exposing (..)
 
-import Navigation exposing (Location, program)
-import Routes exposing (parseLocation)
 import Messages exposing (Msg(..))
 import Models exposing (Model, initialModel)
+import Navigation exposing (Location)
 import Launches.Commands exposing (fetchAll)
+import Routes exposing (Route)
 import Update exposing (update)
 import View exposing (view)
 
@@ -21,10 +21,6 @@ init location =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
-
-
-
--- MAIN
 
 
 main : Program Never Model Msg

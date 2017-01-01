@@ -5,5 +5,5 @@ import Launches.Messages
 
 
 type Msg
-    = LaunchesMsg Launches.Messages.Msg
-    | OnLocationChange Location
+    = OnLocationChange Location
+    | LaunchesMsg Launches.Messages.Msg

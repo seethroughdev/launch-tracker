@@ -5,9 +5,7 @@ import RemoteData exposing (..)
 import Launches.Models exposing (..)
 import Navigation
 import List.Extra as List
-
-
--- import Routes exposing (Route(..), locationToString)
+import Routes exposing (Route(..), locationToString)
 
 
 getOffsetId : Int -> LaunchId -> WebData (List Launch) -> Maybe LaunchId
@@ -91,10 +89,10 @@ update msg model =
                 )
 
         ShowLaunches ->
-            ( model, Navigation.newUrl "#launches" )
+            ( model, Navigation.newUrl (locationToString LaunchesRoute) )
 
         ShowLaunch id ->
-            ( model, Navigation.newUrl ("#launches/" ++ toString id) )
+            ( model, Navigation.newUrl (locationToString (LaunchRoute id)) )
 
         ShowNextLaunch id ->
             let
@@ -106,7 +104,7 @@ update msg model =
                         ( model, Cmd.none )
 
                     Just val ->
-                        ( model, Navigation.newUrl ("#launches/" ++ toString val) )
+                        ( model, Navigation.newUrl (locationToString (LaunchRoute val)) )
 
         ShowPrevLaunch id ->
             let
@@ -118,4 +116,4 @@ update msg model =
                         ( model, Cmd.none )
 
                     Just val ->
-                        ( model, Navigation.newUrl ("#launches/" ++ toString val) )
+                        ( model, Navigation.newUrl (locationToString (LaunchRoute val)) )

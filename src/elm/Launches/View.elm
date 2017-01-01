@@ -63,10 +63,19 @@ listView launches =
         ]
 
 
+renderNavButtons : Launch -> Html Msg
+renderNavButtons launch =
+    div []
+        [ button [ onClick (ShowPrevLaunch launch.id) ] [ text "Prev" ]
+        , button [ onClick (ShowNextLaunch launch.id) ] [ text "Next" ]
+        ]
+
+
 renderLaunch : Launch -> Html Msg
 renderLaunch launch =
-    div [ onClick (ShowLaunch 42) ]
+    div []
         [ h4 [] [ text "Launch" ]
+        , renderNavButtons launch
         , h1 [] [ text launch.name ]
         , text (toString launch)
         ]

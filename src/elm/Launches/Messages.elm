@@ -8,3 +8,5 @@ type Msg
     = LaunchesResponse (RemoteData.WebData (List Launch))
     | ShowLaunches
     | ShowLaunch LaunchId
+    | ShowNextLaunch LaunchId
+    | ShowPrevLaunch LaunchId

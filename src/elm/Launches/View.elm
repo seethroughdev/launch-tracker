@@ -30,10 +30,11 @@ renderLaunchDate d =
 
 listLaunch : Launch -> Html Msg
 listLaunch launch =
-    li []
+    li [ onClick (ShowLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
         , p [] [ renderLaunchDate launch.isoStart ]
+        , p [] [ text (toString launch.id) ]
         ]
 
 
@@ -56,7 +57,7 @@ renderListLaunch data =
 
 listView : Launches -> Html Msg
 listView launches =
-    aside [ class "aside", onClick ShowLaunches ]
+    aside [ class "aside" ]
         [ h3 [] [ text "Upcoming Launches" ]
         , renderListLaunch launches.data
         ]
@@ -78,9 +79,9 @@ renderNoLaunch =
         ]
 
 
-launchView : Launches -> Html Msg
-launchView launches =
-    case launches.currentLaunch of
+launchView : Maybe Launch -> Html Msg
+launchView launch =
+    case launch of
         Just value ->
             renderLaunch value
 
@@ -91,12 +92,12 @@ launchView launches =
                 ]
 
 
-view : Launches -> Maybe LaunchId -> Html Msg
-view model launchId =
+view : Launches -> Maybe Launch -> Html Msg
+view model launch =
     div [ class "mainContainer" ]
         [ listView model
         , main_ [ class "main" ]
-            [ launchView model
+            [ launchView launch
             , button [ onClick ShowLaunches ] [ text "Show em!" ]
             ]
         ]

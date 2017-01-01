@@ -6,7 +6,7 @@ import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Launches.Models exposing (LaunchId)
 import Launches.List
-import Launches.Edit
+import Launches.View
 import Launches.Update exposing (getCurrentLaunch)
 
 
@@ -37,7 +37,7 @@ launchEditPage model launchId =
     in
         case currentLaunch of
             Just launch ->
-                Html.map LaunchesMsg (Launches.Edit.view launch)
+                Html.map LaunchesMsg (Launches.View.view model.launches currentLaunch)
 
             Nothing ->
                 notFoundView

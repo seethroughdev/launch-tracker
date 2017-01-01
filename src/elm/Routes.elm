@@ -1,14 +1,14 @@
 module Routes exposing (..)
 
 import Navigation exposing (Location)
-import UrlParser exposing (..)
 import Launches.Models exposing (LaunchId)
+import UrlParser exposing (..)
 
 
 type Route
-    = NotFoundRoute
+    = LaunchesRoute
     | LaunchRoute LaunchId
-    | LaunchesRoute
+    | NotFoundRoute
 
 
 matchers : Parser (Route -> a) a
@@ -28,16 +28,3 @@ parseLocation location =
 
         Nothing ->
             NotFoundRoute
-
-
-locationToString : Route -> String
-locationToString location =
-    case location of
-        LaunchesRoute ->
-            "/#launches"
-
-        LaunchRoute launchId ->
-            "/#launches/" ++ (toString launchId)
-
-        NotFoundRoute ->
-            "404.html"

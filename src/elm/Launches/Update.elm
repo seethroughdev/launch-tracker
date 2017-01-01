@@ -3,6 +3,10 @@ module Launches.Update exposing (..)
 import Launches.Messages exposing (Msg(..))
 import RemoteData exposing (..)
 import Launches.Models exposing (..)
+import Navigation
+
+
+-- import Routes exposing (Route(..), locationToString)
 
 
 getCurrentLaunch : LaunchId -> WebData (List Launch) -> Maybe Launch
@@ -36,7 +40,12 @@ update msg model =
             in
                 ( { model
                     | data = response
-                    , currentLaunch = currentLaunch
                   }
                 , Cmd.none
                 )
+
+        ShowLaunches ->
+            ( model, Navigation.newUrl "#launches" )
+
+        ShowLaunch id ->
+            ( model, Navigation.newUrl ("#launches/" ++ toString id) )

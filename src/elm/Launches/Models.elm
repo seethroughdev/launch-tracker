@@ -11,7 +11,7 @@ type alias LaunchId =
     Int
 
 
-initLocation : Location
+initLocation : LocationType
 initLocation =
     { id = 0
     , name = ""
@@ -40,7 +40,7 @@ type alias Launch =
     , name : String
     , isoStart : String
     , status : Int
-    , location : Location
+    , location : LocationType
     , missions : List Mission
     }
 
@@ -50,7 +50,7 @@ type alias Mission =
     }
 
 
-type alias Location =
+type alias LocationType =
     { id : Int
     , name : String
     , countryCode : String

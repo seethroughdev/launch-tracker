@@ -2,6 +2,7 @@ module Launches.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
@@ -55,7 +56,7 @@ renderListLaunch data =
 
 listView : Launches -> Html Msg
 listView launches =
-    aside [ class "aside" ]
+    aside [ class "aside", onClick ShowLaunches ]
         [ h3 [] [ text "Upcoming Launches" ]
         , renderListLaunch launches.data
         ]
@@ -63,7 +64,7 @@ listView launches =
 
 renderLaunch : Launch -> Html Msg
 renderLaunch launch =
-    div []
+    div [ onClick (ShowLaunch 42) ]
         [ h4 [] [ text "Launch" ]
         , h1 [] [ text launch.name ]
         , text (toString launch)
@@ -96,5 +97,6 @@ view model launchId =
         [ listView model
         , main_ [ class "main" ]
             [ launchView model
+            , button [ onClick ShowLaunches ] [ text "Show em!" ]
             ]
         ]

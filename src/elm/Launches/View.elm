@@ -6,107 +6,79 @@ import Html.Events exposing (onClick)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
+import Components.ViewHelpers as ViewHelpers
 
 
--- import Date exposing (Month(..))
-
-import Date.Extra as Date
-
-
-renderLaunchDate : String -> Html Msg
-renderLaunchDate d =
-    case Date.fromIsoString d of
+itemView : Maybe Launch -> Html Msg
+itemView launch =
+    case launch of
         Nothing ->
-            text "No date"
+            div [] [ text "No active launch" ]
 
-        Just dateString ->
-            let
-                formattedDate =
-                    dateString
-                        |> Date.toFormattedString "EEEE, MMMM d, y 'at' h:mm a"
-            in
-                text formattedDate
+        Just l ->
+            div []
+                [ h3 [] [ text (toString launch) ]
+                ]
 
 
-listLaunch : Launch -> Html Msg
-listLaunch launch =
+listItemView : Launch -> Html Msg
+listItemView launch =
     li [ onClick (ShowLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
-        , p [] [ renderLaunchDate launch.isoStart ]
+        , p [] [ ViewHelpers.renderLaunchDate launch.isoStart ]
         , p [] [ text (toString launch.id) ]
         ]
 
 
-renderListLaunch : WebData (List Launch) -> Html Msg
-renderListLaunch data =
-    case data of
+launchView : Launches -> Maybe Launch -> Html Msg
+launchView model launch =
+    case model.data of
         NotAsked ->
-            li [] []
+            div [] []
 
         Loading ->
-            li [] [ text "Loading" ]
+            div [] [ text "Loading" ]
 
         Failure e ->
-            li [] [ text (toString e) ]
+            div [] [ text "No Launches, must be an error" ]
 
         Success data ->
-            ul []
-                (List.map listLaunch data)
+            itemView launch
 
 
-listView : Launches -> Html Msg
-listView launches =
-    aside [ class "aside" ]
-        [ h3 [] [ text "Upcoming Launches" ]
-        , renderListLaunch launches.data
-        ]
+listView : Launches -> List (Html Msg)
+listView model =
+    case model.data of
+        NotAsked ->
+            [ li [] []
+            ]
 
+        Loading ->
+            [ li [] [ text "Loading" ]
+            ]
 
-renderNavButtons : Launch -> Html Msg
-renderNavButtons launch =
-    div []
-        [ button [ onClick (ShowPrevLaunch launch.id) ] [ text "Prev" ]
-        , button [ onClick (ShowNextLaunch launch.id) ] [ text "Next" ]
-        ]
+        Failure e ->
+            [ li [] [ text "No Launches, must be an error" ]
+            ]
 
-
-renderLaunch : Launch -> Html Msg
-renderLaunch launch =
-    div []
-        [ h4 [] [ text "Launch" ]
-        , renderNavButtons launch
-        , h1 [] [ text launch.name ]
-        , text (toString launch)
-        ]
-
-
-renderNoLaunch : Html Msg
-renderNoLaunch =
-    div []
-        [ text "That launch no longer exists, try another"
-        ]
-
-
-launchView : Maybe Launch -> Html Msg
-launchView launch =
-    case launch of
-        Just value ->
-            renderLaunch value
-
-        Nothing ->
-            div []
-                [ h4 [] [ text "Launch" ]
-                , text "Loading Launch"
-                ]
+        Success data ->
+            (List.map listItemView data)
 
 
 view : Launches -> Maybe Launch -> Html Msg
 view model launch =
     div [ class "mainContainer" ]
-        [ listView model
+        [ aside [ class "aside" ]
+            [ h3 [] [ text "Upcoming Launches" ]
+            , ul []
+                (listView model)
+            ]
         , main_ [ class "main" ]
-            [ launchView launch
-            , button [ onClick ShowLaunches ] [ text "Show em!" ]
+            [ div
+                []
+                [ h4 [] [ text "Launch" ]
+                , (launchView model launch)
+                ]
             ]
         ]

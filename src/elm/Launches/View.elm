@@ -7,13 +7,14 @@ import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
 import Components.ViewHelpers as ViewHelpers
+import Components.Copy exposing (copy)
 
 
 itemView : Maybe Launch -> Html Msg
 itemView launch =
     case launch of
         Nothing ->
-            div [] [ text "No active launch" ]
+            div [] [ text copy.launchInactive ]
 
         Just l ->
             div []
@@ -38,10 +39,10 @@ launchView model launch =
             div [] []
 
         Loading ->
-            div [] [ text "Loading" ]
+            div [] [ text copy.loading ]
 
         Failure e ->
-            div [] [ text "No Launches, must be an error" ]
+            div [] [ text copy.launchesError ]
 
         Success data ->
             itemView launch
@@ -55,11 +56,11 @@ listView model =
             ]
 
         Loading ->
-            [ li [] [ text "Loading" ]
+            [ li [] [ text copy.loading ]
             ]
 
         Failure e ->
-            [ li [] [ text "No Launches, must be an error" ]
+            [ li [] [ text copy.launchesError ]
             ]
 
         Success data ->
@@ -70,7 +71,7 @@ view : Launches -> Maybe Launch -> Html Msg
 view model launch =
     div [ class "mainContainer" ]
         [ aside [ class "aside" ]
-            [ h3 [] [ text "Upcoming Launches" ]
+            [ h3 [] [ text copy.launchesList ]
             , ul []
                 (listView model)
             ]

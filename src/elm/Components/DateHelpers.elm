@@ -1,12 +1,14 @@
 module Components.DateHelpers exposing (..)
 
-import Date.Extra as Date
+import Date exposing (fromTime)
+import Date.Extra as Date exposing (..)
+import Components.Copy exposing (copy)
 import Html exposing (..)
 
 
 getDateString : String -> String -> Html msg
 getDateString template d =
-    case Date.fromIsoString d of
+    case fromIsoString d of
         Nothing ->
             text "No date"
 
@@ -14,7 +16,7 @@ getDateString template d =
             let
                 formattedDate =
                     dateString
-                        |> Date.toFormattedString template
+                        |> toFormattedString template
             in
                 text formattedDate
 
@@ -24,6 +26,27 @@ dateHeading d =
     getDateString "MMM d" d
 
 
-renderLaunchDate : String -> Html msg
-renderLaunchDate d =
+launchDate : String -> Html msg
+launchDate d =
     getDateString "EEEE, MMMM d, y 'at' h:mm a" d
+
+
+launchWindow : Float -> Float -> Html msg
+launchWindow start end =
+    if start == end then
+        span [] [ text copy.noLaunchWindow ]
+    else
+        let
+            startTime =
+                Date.fromTime (start * 1000)
+
+            endTime =
+                Date.fromTime (end * 1000)
+
+            w =
+                Date.diff Minute startTime endTime
+        in
+            Debug.log (toString w)
+                span
+                []
+                [ text ("Window ~" ++ (toString w) ++ " min") ]

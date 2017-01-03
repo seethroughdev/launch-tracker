@@ -21,6 +21,8 @@ itemView launch =
                 [ h2 [] [ DateHelpers.dateHeading l.isoStart ]
                 , p [] [ text l.location.name ]
                 , h1 [] [ text l.name ]
+                , div [] [ DateHelpers.launchWindow l.wsstamp l.westamp ]
+                , hr [] []
                 , p [] [ text (toString launch) ]
                 ]
 
@@ -30,7 +32,7 @@ listItemView launch =
     li [ onClick (ShowLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
-        , p [] [ DateHelpers.renderLaunchDate launch.isoStart ]
+        , p [] [ DateHelpers.launchDate launch.isoStart ]
         , p [] [ text (toString launch.id) ]
         ]
 

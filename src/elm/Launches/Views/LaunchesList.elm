@@ -1,4 +1,4 @@
-module Components.LaunchesList exposing (view)
+module Launches.Views.LaunchesList exposing (view)
 
 import Html exposing (..)
 import Html.Events exposing (onClick)

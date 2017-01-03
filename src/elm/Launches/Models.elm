@@ -31,6 +31,13 @@ initLaunches =
     Launches Loading Nothing ""
 
 
+type LaunchMenu
+    = Main
+    | Agencies
+    | Rocket
+    | Location
+
+
 
 -- RESPONSES
 

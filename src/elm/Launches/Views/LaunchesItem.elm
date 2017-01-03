@@ -1,4 +1,4 @@
-module Components.LaunchesItem exposing (view)
+module Launches.Views.LaunchesItem exposing (view)
 
 import Html exposing (..)
 import Html.Events exposing (onClick)
@@ -6,6 +6,7 @@ import Components.DateHelpers as DateHelpers
 import Launches.Models exposing (Launches, Launch, LaunchId, Mission)
 import Launches.Messages exposing (Msg(..))
 import Components.Copy exposing (copy)
+import Launches.Views.LaunchesMenu as LaunchesMenu
 
 
 renderButtonNav : Launch -> Html Msg
@@ -35,6 +36,7 @@ view launch =
                 , h1 [] [ text l.name ]
                 , div [] [ DateHelpers.launchWindow l.wsstamp l.westamp ]
                 , div [] [ DateHelpers.launchTime l.isoStart ]
+                , LaunchesMenu.view l
                 , ul []
                     (List.map renderMissionDescriptions l.missions)
                 , hr [] []

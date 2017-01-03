@@ -6,8 +6,8 @@ import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
 import Components.Copy exposing (copy)
-import Components.LaunchesList as LaunchesList
-import Components.LaunchesItem as LaunchesItem
+import Launches.Views.LaunchesList as LaunchesList
+import Launches.Views.LaunchesItem as LaunchesItem
 
 
 launchView : Launches -> Maybe Launch -> Html Msg

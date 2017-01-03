@@ -18,7 +18,10 @@ itemView launch =
 
         Just l ->
             div []
-                [ h3 [] [ text (toString launch) ]
+                [ h2 [] [ ViewHelpers.dateHeading l.isoStart ]
+                , p [] [ text l.location.name ]
+                , h1 [] [ text l.name ]
+                , p [] [ text (toString launch) ]
                 ]
 
 

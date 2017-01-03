@@ -46,7 +46,4 @@ launchWindow start end =
             w =
                 Date.diff Minute startTime endTime
         in
-            Debug.log (toString w)
-                span
-                []
-                [ text ("Window ~" ++ (toString w) ++ " min") ]
+            span [] [ text ("Window ~" ++ (toString w) ++ " min") ]

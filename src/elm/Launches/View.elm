@@ -6,7 +6,7 @@ import Html.Events exposing (onClick)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
-import Components.ViewHelpers as ViewHelpers
+import Components.DateHelpers as DateHelpers
 import Components.Copy exposing (copy)
 
 
@@ -18,7 +18,7 @@ itemView launch =
 
         Just l ->
             div []
-                [ h2 [] [ ViewHelpers.dateHeading l.isoStart ]
+                [ h2 [] [ DateHelpers.dateHeading l.isoStart ]
                 , p [] [ text l.location.name ]
                 , h1 [] [ text l.name ]
                 , p [] [ text (toString launch) ]
@@ -30,7 +30,7 @@ listItemView launch =
     li [ onClick (ShowLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
-        , p [] [ ViewHelpers.renderLaunchDate launch.isoStart ]
+        , p [] [ DateHelpers.renderLaunchDate launch.isoStart ]
         , p [] [ text (toString launch.id) ]
         ]
 

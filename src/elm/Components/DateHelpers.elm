@@ -1,4 +1,4 @@
-module Components.ViewHelpers exposing (..)
+module Components.DateHelpers exposing (..)
 
 import Date.Extra as Date
 import Html exposing (..)

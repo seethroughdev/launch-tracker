@@ -38,6 +38,8 @@ initLaunches =
 type alias Launch =
     { id : LaunchId
     , name : String
+    , wsstamp : Float
+    , westamp : Float
     , isoStart : String
     , status : Int
     , location : LocationType

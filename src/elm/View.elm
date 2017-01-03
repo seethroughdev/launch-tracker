@@ -34,12 +34,7 @@ renderLaunchesPage model launchId =
         currentLaunch =
             getCurrentLaunch launchId model.launches.data
     in
-        case currentLaunch of
-            Just launch ->
-                Html.map LaunchesMsg (Launches.View.view model.launches currentLaunch)
-
-            Nothing ->
-                notFoundView
+        Html.map LaunchesMsg (Launches.View.view model.launches currentLaunch)
 
 
 notFoundView : Html Msg

@@ -39,6 +39,8 @@ launchDecoder =
     decode Launch
         |> required "id" int
         |> required "name" string
+        |> required "wsstamp" float
+        |> required "westamp" float
         |> required "isostart" string
         |> required "status" int
         |> required "location" locationDecoder

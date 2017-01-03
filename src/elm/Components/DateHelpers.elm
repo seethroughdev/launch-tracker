@@ -47,3 +47,8 @@ launchWindow start end =
                 Date.diff Minute startTime endTime
         in
             span [] [ text ("Window ~" ++ (toString w) ++ " min") ]
+
+
+launchTime : String -> Html msg
+launchTime d =
+    getDateString "h:mm a" d

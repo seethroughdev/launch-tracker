@@ -22,6 +22,7 @@ itemView launch =
                 , p [] [ text l.location.name ]
                 , h1 [] [ text l.name ]
                 , div [] [ DateHelpers.launchWindow l.wsstamp l.westamp ]
+                , div [] [ DateHelpers.launchTime l.isoStart ]
                 , hr [] []
                 , p [] [ text (toString launch) ]
                 ]

@@ -2,6 +2,7 @@ module Components.Buttons exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (class, style)
+import Html.Events exposing (onClick)
 
 
 type BtnSize
@@ -25,11 +26,12 @@ type BtnIcon
     | Noop
 
 
-type alias Btn =
+type alias Btn msg =
     { text : String
     , size : BtnSize
     , intent : BtnIntent
     , icon : BtnIcon
+    , cb : Maybe msg
     }
 
 
@@ -62,17 +64,27 @@ getBtnIntent intent =
             [ ( "", "" ) ]
 
 
-buttonStyle : Btn -> List (List ( String, String ))
+buttonStyle : Btn msg -> List (List ( String, String ))
 buttonStyle btn =
     [ getBtnSize btn.size
     , getBtnIntent btn.intent
     ]
 
 
-view : Btn -> Html msg
+view : Btn msg -> Html msg
 view btn =
-    button
-        [ class "button"
-        , style <| List.concat (buttonStyle btn)
-        ]
-        [ text btn.text ]
+    case btn.cb of
+        Nothing ->
+            button
+                [ class "button"
+                , style <| List.concat (buttonStyle btn)
+                ]
+                [ text btn.text ]
+
+        Just cb ->
+            button
+                [ class "button"
+                , onClick cb
+                , style <| List.concat (buttonStyle btn)
+                ]
+                [ text btn.text ]

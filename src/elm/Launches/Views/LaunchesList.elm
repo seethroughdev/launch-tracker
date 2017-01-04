@@ -12,6 +12,6 @@ view launch =
     li [ onClick (ShowLaunch launch.id) ]
         [ h4 [] [ text launch.name ]
         , p [] [ text launch.location.name ]
-        , p [] [ DateHelpers.launchDate launch.isoStart ]
+        , p [] [ text (DateHelpers.launchDate launch.isoStart) ]
         , p [] [ text (toString launch.id) ]
         ]

@@ -7,4 +7,5 @@ copy =
     , launchesList = "Upcoming Launches"
     , launchInactive = "This launch is inactive"
     , noLaunchWindow = "No window specified"
+    , watchLaunch = "Watch Launch"
     }

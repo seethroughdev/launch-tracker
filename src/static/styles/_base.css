@@ -30,6 +30,10 @@ ul {
   padding-left: 0;
 }
 
+hr {
+  margin: 2rem auto;
+}
+
 button {
   background: $buttonBg;
   border: 1px solid #c7c7c7;

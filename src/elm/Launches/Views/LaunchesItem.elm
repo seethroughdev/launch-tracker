@@ -7,7 +7,7 @@ import Launches.Models exposing (Launches, Launch, LaunchId, Mission, LaunchMenu
 import Launches.Messages exposing (Msg(..))
 import Components.Copy exposing (copy)
 import Launches.Views.LaunchesMenu as LaunchesMenu
-import Components.Buttons as Button exposing (BtnSize, Btn)
+import Components.Buttons as Button exposing (Btn)
 
 
 renderButtonNav : Launch -> Html Msg
@@ -21,10 +21,23 @@ renderButtonNav launch =
 watchButton : Btn
 watchButton =
     Btn
-        "ok player"
+        copy.watchLaunch
         Button.Large
         Button.Primary
         Button.Watch
+
+
+alarmButton : Launch -> Btn
+alarmButton launch =
+    let
+        text =
+            toString (DateHelpers.launchTime launch.isoStart)
+    in
+        Btn
+            (DateHelpers.launchTime launch.isoStart)
+            Button.Small
+            Button.Secondary
+            Button.Alarm
 
 
 renderMissionDescriptions : Mission -> Html Msg
@@ -41,11 +54,11 @@ view menu launch =
         Just l ->
             div []
                 [ renderButtonNav l
-                , h2 [] [ DateHelpers.dateHeading l.isoStart ]
+                , h2 [] [ text (DateHelpers.dateHeading l.isoStart) ]
                 , p [] [ text l.location.name ]
                 , h1 [] [ text l.name ]
                 , div [] [ DateHelpers.launchWindow l.wsstamp l.westamp ]
-                , div [] [ DateHelpers.launchTime l.isoStart ]
+                , p [] [ Button.view (alarmButton l) ]
                 , LaunchesMenu.view menu l
                 , ul []
                     (List.map renderMissionDescriptions l.missions)

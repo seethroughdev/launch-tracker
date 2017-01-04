@@ -1,6 +1,7 @@
 module Launches.Views.LaunchesMenu exposing (view)
 
 import Html exposing (..)
+import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Launches.Models exposing (..)
 import Launches.Messages exposing (Msg(..))
@@ -56,7 +57,7 @@ renderContainer launchMenu launch =
 
 renderNav : Html Msg
 renderNav =
-    ul []
+    ul [ class "launchMenu horizontalMenu" ]
         [ li [ onClick (ChangeMenu Main) ] [ text "Main" ]
         , li [ onClick (ChangeMenu Agencies) ] [ text "Agencies" ]
         , li [ onClick (ChangeMenu Rocket) ] [ text "Rocket" ]

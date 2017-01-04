@@ -1,7 +1,6 @@
 module Launches.Views.LaunchesItem exposing (view)
 
 import Html exposing (..)
-import Html.Events exposing (onClick)
 import Components.DateHelpers as DateHelpers
 import Launches.Models exposing (Launches, Launch, LaunchId, Mission, LaunchMenu)
 import Launches.Messages exposing (Msg(..))
@@ -10,24 +9,45 @@ import Launches.Views.LaunchesMenu as LaunchesMenu
 import Components.Buttons as Button exposing (Btn)
 
 
+prevButton : Launch -> Btn Msg
+prevButton launch =
+    Btn
+        "Previous"
+        Button.Small
+        Button.Secondary
+        Button.Noop
+        (Just (ShowPrevLaunch launch.id))
+
+
+nextButton : Launch -> Btn Msg
+nextButton launch =
+    Btn
+        "Next"
+        Button.Small
+        Button.Secondary
+        Button.Noop
+        (Just (ShowNextLaunch launch.id))
+
+
 renderButtonNav : Launch -> Html Msg
 renderButtonNav launch =
     div []
-        [ button [ onClick (ShowPrevLaunch launch.id) ] [ text "Previous" ]
-        , button [ onClick (ShowNextLaunch launch.id) ] [ text "Next" ]
+        [ Button.view (prevButton launch)
+        , Button.view (nextButton launch)
         ]
 
 
-watchButton : Btn
+watchButton : Btn msg
 watchButton =
     Btn
         copy.watchLaunch
         Button.Large
         Button.Primary
         Button.Watch
+        Nothing
 
 
-alarmButton : Launch -> Btn
+alarmButton : Launch -> Btn msg
 alarmButton launch =
     let
         text =
@@ -38,6 +58,7 @@ alarmButton launch =
             Button.Small
             Button.Secondary
             Button.Alarm
+            Nothing
 
 
 renderMissionDescriptions : Mission -> Html Msg

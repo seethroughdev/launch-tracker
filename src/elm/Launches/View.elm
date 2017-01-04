@@ -1,7 +1,7 @@
 module Launches.View exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (class)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
@@ -42,7 +42,11 @@ listView model =
             ]
 
         Success data ->
-            (List.map LaunchesList.view data)
+            let
+                launchView launch =
+                    LaunchesList.view launch model.currentId
+            in
+                (List.map launchView data)
 
 
 view : Launches -> Maybe Launch -> Html Msg
@@ -50,7 +54,7 @@ view model launch =
     div [ class "mainContainer" ]
         [ aside [ class "aside" ]
             [ h3 [] [ text copy.launchesList ]
-            , ul []
+            , ul [ class "launchesList" ]
                 (listView model)
             ]
         , main_ [ class "main" ]

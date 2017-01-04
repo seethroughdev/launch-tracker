@@ -7,6 +7,7 @@ import Launches.Models exposing (Launches, Launch, LaunchId, Mission, LaunchMenu
 import Launches.Messages exposing (Msg(..))
 import Components.Copy exposing (copy)
 import Launches.Views.LaunchesMenu as LaunchesMenu
+import Components.Buttons as Button exposing (BtnSize, Btn)
 
 
 renderButtonNav : Launch -> Html Msg
@@ -15,6 +16,15 @@ renderButtonNav launch =
         [ button [ onClick (ShowPrevLaunch launch.id) ] [ text "Previous" ]
         , button [ onClick (ShowNextLaunch launch.id) ] [ text "Next" ]
         ]
+
+
+watchButton : Btn
+watchButton =
+    Btn
+        "ok player"
+        Button.Large
+        Button.Primary
+        Button.Watch
 
 
 renderMissionDescriptions : Mission -> Html Msg
@@ -39,6 +49,7 @@ view menu launch =
                 , LaunchesMenu.view menu l
                 , ul []
                     (List.map renderMissionDescriptions l.missions)
+                , Button.view watchButton
                 , hr [] []
                 , p [] [ text (toString launch) ]
                 ]

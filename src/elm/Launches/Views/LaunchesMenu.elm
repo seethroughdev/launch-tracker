@@ -55,19 +55,40 @@ renderContainer launchMenu launch =
             renderLocation launch
 
 
-renderNav : Html Msg
-renderNav =
-    ul [ class "launchMenu horizontalMenu" ]
-        [ li [ onClick (ChangeMenu Main) ] [ text "Main" ]
-        , li [ onClick (ChangeMenu Agencies) ] [ text "Agencies" ]
-        , li [ onClick (ChangeMenu Rocket) ] [ text "Rocket" ]
-        , li [ onClick (ChangeMenu Location) ] [ text "Location" ]
+isActiveClass : LaunchMenu -> LaunchMenu -> String
+isActiveClass current el =
+    if (current == el) then
+        "isActive"
+    else
+        ""
+
+
+getNavItem : LaunchMenu -> LaunchMenu -> Html Msg
+getNavItem currentMenu menu =
+    li
+        [ class (isActiveClass currentMenu menu)
+        , onClick (ChangeMenu menu)
         ]
+        [ text (toString menu) ]
+
+
+renderNav : LaunchMenu -> Html Msg
+renderNav currentMenu =
+    let
+        renderNavItem menu =
+            getNavItem currentMenu menu
+    in
+        ul [ class "launchMenu horizontalMenu" ]
+            [ renderNavItem Main
+            , renderNavItem Agencies
+            , renderNavItem Rocket
+            , renderNavItem Location
+            ]
 
 
 view : LaunchMenu -> Launch -> Html Msg
-view menu launch =
+view currentMenu launch =
     div []
-        [ renderNav
-        , renderContainer menu launch
+        [ renderNav currentMenu
+        , renderContainer currentMenu launch
         ]

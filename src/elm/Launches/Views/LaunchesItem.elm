@@ -47,18 +47,22 @@ watchButton =
         Nothing
 
 
+getAlarmText : Launch -> String
+getAlarmText l =
+    if l.wsstamp == l.westamp then
+        DateHelpers.launchTime l.isoStart
+    else
+        DateHelpers.launchWindow l.wsstamp l.westamp
+
+
 alarmButton : Launch -> Btn msg
-alarmButton launch =
-    let
-        text =
-            toString (DateHelpers.launchTime launch.isoStart)
-    in
-        Btn
-            (DateHelpers.launchTime launch.isoStart)
-            Button.Small
-            Button.Secondary
-            Button.Alarm
-            Nothing
+alarmButton l =
+    Btn
+        (getAlarmText l)
+        Button.Small
+        Button.Secondary
+        Button.Alarm
+        Nothing
 
 
 renderMissionDescriptions : Mission -> Html Msg
@@ -78,7 +82,6 @@ view menu launch =
                 , h2 [] [ text (DateHelpers.dateHeading l.isoStart) ]
                 , p [] [ text l.location.name ]
                 , h1 [] [ text l.name ]
-                , div [] [ DateHelpers.launchWindow l.wsstamp l.westamp ]
                 , p [] [ Button.view (alarmButton l) ]
                 , LaunchesMenu.view menu l
                 , ul []

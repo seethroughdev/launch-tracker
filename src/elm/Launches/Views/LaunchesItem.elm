@@ -3,7 +3,7 @@ module Launches.Views.LaunchesItem exposing (view)
 import Html exposing (..)
 import Html.Events exposing (onClick)
 import Components.DateHelpers as DateHelpers
-import Launches.Models exposing (Launches, Launch, LaunchId, Mission)
+import Launches.Models exposing (Launches, Launch, LaunchId, Mission, LaunchMenu)
 import Launches.Messages exposing (Msg(..))
 import Components.Copy exposing (copy)
 import Launches.Views.LaunchesMenu as LaunchesMenu
@@ -22,8 +22,8 @@ renderMissionDescriptions mission =
     li [] [ text mission.description ]
 
 
-view : Maybe Launch -> Html Msg
-view launch =
+view : LaunchMenu -> Maybe Launch -> Html Msg
+view menu launch =
     case launch of
         Nothing ->
             div [] [ text copy.launchInactive ]
@@ -36,7 +36,7 @@ view launch =
                 , h1 [] [ text l.name ]
                 , div [] [ DateHelpers.launchWindow l.wsstamp l.westamp ]
                 , div [] [ DateHelpers.launchTime l.isoStart ]
-                , LaunchesMenu.view l
+                , LaunchesMenu.view menu l
                 , ul []
                     (List.map renderMissionDescriptions l.missions)
                 , hr [] []

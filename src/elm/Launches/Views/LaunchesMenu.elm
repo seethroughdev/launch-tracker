@@ -1,7 +1,8 @@
 module Launches.Views.LaunchesMenu exposing (view)
 
 import Html exposing (..)
-import Launches.Models exposing (Launch, LaunchMenu)
+import Html.Events exposing (onClick)
+import Launches.Models exposing (..)
 import Launches.Messages exposing (Msg(..))
 
 
@@ -37,8 +38,8 @@ renderLocation launch =
         ]
 
 
-renderContainer : Launch -> LaunchMenu -> Html Msg
-renderContainer launch launchMenu =
+renderContainer : LaunchMenu -> Launch -> Html Msg
+renderContainer launchMenu launch =
     case launchMenu of
         Main ->
             renderMain launch
@@ -56,16 +57,16 @@ renderContainer launch launchMenu =
 renderNav : Html Msg
 renderNav =
     ul []
-        [ li [] [ text "Main" ]
-        , li [] [ text "Agencies" ]
-        , li [] [ text "Rocket" ]
-        , li [] [ text "Location" ]
+        [ li [ onClick (ChangeMenu Main) ] [ text "Main" ]
+        , li [ onClick (ChangeMenu Agencies) ] [ text "Agencies" ]
+        , li [ onClick (ChangeMenu Rocket) ] [ text "Rocket" ]
+        , li [ onClick (ChangeMenu Location) ] [ text "Location" ]
         ]
 
 
-view : Launch -> Html Msg
-view launch =
+view : LaunchMenu -> Launch -> Html Msg
+view menu launch =
     div []
         [ renderNav
-        , renderMain launch
+        , renderContainer menu launch
         ]

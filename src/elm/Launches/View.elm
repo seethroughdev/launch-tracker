@@ -23,7 +23,7 @@ launchView model launch =
             div [] [ text copy.launchesError ]
 
         Success data ->
-            LaunchesItem.view launch
+            LaunchesItem.view model.menu launch
 
 
 listView : Launches -> List (Html Msg)

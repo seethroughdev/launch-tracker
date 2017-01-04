@@ -11,15 +11,6 @@ import Routes exposing (Route(..), locationToString)
 getOffsetId : Int -> LaunchId -> WebData (List Launch) -> Maybe LaunchId
 getOffsetId offset id launches =
     case launches of
-        NotAsked ->
-            Nothing
-
-        Loading ->
-            Nothing
-
-        Failure e ->
-            Nothing
-
         Success data ->
             let
                 newIndex =
@@ -52,19 +43,13 @@ getOffsetId offset id launches =
                                 Just item ->
                                     Just item.id
 
+        _ ->
+            Nothing
+
 
 getCurrentLaunch : LaunchId -> WebData (List Launch) -> Maybe Launch
 getCurrentLaunch launchId launches =
     case launches of
-        NotAsked ->
-            Nothing
-
-        Loading ->
-            Nothing
-
-        Failure e ->
-            Nothing
-
         Success data ->
             if launchId == 0 then
                 List.head data
@@ -72,6 +57,9 @@ getCurrentLaunch launchId launches =
                 data
                     |> List.filter (\u -> u.id == launchId)
                     |> List.head
+
+        _ ->
+            Nothing
 
 
 update : Msg -> Launches -> ( Launches, Cmd Msg )
@@ -117,3 +105,6 @@ update msg model =
 
                     Just val ->
                         ( model, Navigation.newUrl (locationToString (LaunchRoute val)) )
+
+        ChangeMenu menu ->
+            ( { model | menu = menu }, Cmd.none )

@@ -23,12 +23,13 @@ type alias Launches =
     { data : WebData (List Launch)
     , currentLaunch : Maybe Launch
     , launchQuery : String
+    , menu : LaunchMenu
     }
 
 
 initLaunches : Launches
 initLaunches =
-    Launches Loading Nothing ""
+    Launches Loading Nothing "" Main
 
 
 type LaunchMenu

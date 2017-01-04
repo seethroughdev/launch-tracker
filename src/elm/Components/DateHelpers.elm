@@ -6,11 +6,11 @@ import Components.Copy exposing (copy)
 import Html exposing (..)
 
 
-getDateString : String -> String -> Html msg
+getDateString : String -> String -> String
 getDateString template d =
     case fromIsoString d of
         Nothing ->
-            text "No date"
+            "No date"
 
         Just dateString ->
             let
@@ -18,15 +18,15 @@ getDateString template d =
                     dateString
                         |> toFormattedString template
             in
-                text formattedDate
+                formattedDate
 
 
-dateHeading : String -> Html msg
+dateHeading : String -> String
 dateHeading d =
     getDateString "MMM d" d
 
 
-launchDate : String -> Html msg
+launchDate : String -> String
 launchDate d =
     getDateString "EEEE, MMMM d, y 'at' h:mm a" d
 
@@ -49,6 +49,6 @@ launchWindow start end =
             span [] [ text ("Window ~" ++ (toString w) ++ " min") ]
 
 
-launchTime : String -> Html msg
+launchTime : String -> String
 launchTime d =
     getDateString "h:mm a" d

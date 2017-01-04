@@ -8,7 +8,7 @@ html {
 
 html, body {
   background: $backgroundColor;
-  color: white;
+  color: $textColor;
   font-family: $fontFamily;
   font-size: $fontSize;
   font-weight: $fontWeight;
@@ -28,4 +28,23 @@ h1, h2, h3, h4 {
 
 ul {
   padding-left: 0;
+}
+
+hr {
+  margin: 2rem auto;
+}
+
+button {
+  background: $buttonBg;
+  border: 1px solid #c7c7c7;
+  color: $textColor;
+  display: inline-block;
+  cursor: pointer;
+  padding: 10px 2rem;
+  text-transform: uppercase;
+  &:hover {
+    border-color: $textColor;
+    color: $textColor;
+    background: transparent;
+  }
 }

@@ -1,13 +1,13 @@
 module Launches.View exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (class)
 import Launches.Messages exposing (Msg(..))
 import Launches.Models exposing (Launches, Launch, LaunchId)
 import RemoteData exposing (..)
 import Components.Copy exposing (copy)
-import Components.LaunchesList as LaunchesList
-import Components.LaunchesItem as LaunchesItem
+import Launches.Views.LaunchesList as LaunchesList
+import Launches.Views.LaunchesItem as LaunchesItem
 
 
 launchView : Launches -> Maybe Launch -> Html Msg
@@ -23,11 +23,11 @@ launchView model launch =
             div [] [ text copy.launchesError ]
 
         Success data ->
-            LaunchesItem.view launch
+            LaunchesItem.view model.menu launch
 
 
-listView : Launches -> List (Html Msg)
-listView model =
+listView : Launches -> Maybe Launch -> List (Html Msg)
+listView model currentLaunch =
     case model.data of
         NotAsked ->
             [ li [] []
@@ -42,7 +42,11 @@ listView model =
             ]
 
         Success data ->
-            (List.map LaunchesList.view data)
+            let
+                launchView launch =
+                    LaunchesList.view launch currentLaunch
+            in
+                (List.map launchView data)
 
 
 view : Launches -> Maybe Launch -> Html Msg
@@ -50,8 +54,8 @@ view model launch =
     div [ class "mainContainer" ]
         [ aside [ class "aside" ]
             [ h3 [] [ text copy.launchesList ]
-            , ul []
-                (listView model)
+            , ul [ class "launchesList" ]
+                (listView model launch)
             ]
         , main_ [ class "main" ]
             [ div

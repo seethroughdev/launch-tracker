@@ -1,0 +1,17 @@
+ul.launchesList {
+  list-style-type: none;
+  font-size: 0.9rem;
+  color: #aaa;
+  & li {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #777;
+    cursor: pointer;
+    & h4 {
+      margin: 0;
+    }
+    &:hover, &.isActive {
+      color: $textColor;
+    }
+  }
+}

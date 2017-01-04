@@ -8,27 +8,26 @@ import Launches.Models exposing (Launches, Launch, LaunchId)
 import Launches.Messages exposing (Msg(..))
 
 
-isActive : LaunchId -> Maybe LaunchId -> String
-isActive id currentId =
-    case currentId of
+isActive : LaunchId -> Maybe Launch -> String
+isActive id currentLaunch =
+    case currentLaunch of
         Nothing ->
             ""
 
         Just current ->
-            if (id == current) then
+            if (id == current.id) then
                 "isActive"
             else
                 ""
 
 
-view : Launch -> Maybe LaunchId -> Html Msg
-view launch id =
+view : Launch -> Maybe Launch -> Html Msg
+view launch currentLaunch =
     li
-        [ class (isActive launch.id id)
+        [ class (isActive launch.id currentLaunch)
         , onClick (ShowLaunch launch.id)
         ]
-        [ h4 [] [ text launch.name ]
+        [ h4 [] [ text (launch.name ++ " - " ++ (toString launch.id)) ]
         , p [] [ text launch.location.name ]
         , p [] [ text (DateHelpers.launchDate launch.isoStart) ]
-        , p [] [ text (toString launch.id) ]
         ]

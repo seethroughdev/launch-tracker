@@ -3,10 +3,13 @@ ul.launchesList {
   font-size: 0.9rem;
   color: #aaa;
   & li {
+    padding-top: 2rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #777;
-    margin-bottom: 1rem;
     cursor: pointer;
+    & h4 {
+      margin: 0;
+    }
     &:hover, &.isActive {
       color: $textColor;
     }

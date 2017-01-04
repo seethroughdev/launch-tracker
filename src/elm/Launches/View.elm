@@ -26,8 +26,8 @@ launchView model launch =
             LaunchesItem.view model.menu launch
 
 
-listView : Launches -> List (Html Msg)
-listView model =
+listView : Launches -> Maybe Launch -> List (Html Msg)
+listView model currentLaunch =
     case model.data of
         NotAsked ->
             [ li [] []
@@ -44,7 +44,7 @@ listView model =
         Success data ->
             let
                 launchView launch =
-                    LaunchesList.view launch model.currentId
+                    LaunchesList.view launch currentLaunch
             in
                 (List.map launchView data)
 
@@ -55,7 +55,7 @@ view model launch =
         [ aside [ class "aside" ]
             [ h3 [] [ text copy.launchesList ]
             , ul [ class "launchesList" ]
-                (listView model)
+                (listView model launch)
             ]
         , main_ [ class "main" ]
             [ div

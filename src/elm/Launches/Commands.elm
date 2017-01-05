@@ -3,7 +3,7 @@ module Launches.Commands exposing (..)
 import Http
 import Json.Decode as Json exposing (..)
 import Json.Decode.Pipeline exposing (decode, required, optional, requiredAt)
-import Launches.Models exposing (Mission, Launch, LocationType)
+import Launches.Models exposing (Mission, Launch, LocationType, Agency)
 import RemoteData
 
 
@@ -45,12 +45,24 @@ launchDecoder =
         |> required "status" int
         |> required "location" locationDecoder
         |> required "missions" (list missionDecoder)
+        |> required "agencies" (list agencyDecoder)
 
 
 missionDecoder : Json.Decoder Mission
 missionDecoder =
     decode Mission
         |> required "description" string
+
+
+agencyDecoder : Json.Decoder Agency
+agencyDecoder =
+    decode Agency
+        |> required "id" int
+        |> required "name" string
+        |> required "abbrev" string
+        |> required "countryCode" string
+        |> required "infoURL" string
+        |> required "wikiURL" string
 
 
 locationDecoder : Json.Decoder LocationType

@@ -52,6 +52,7 @@ type alias Launch =
     , status : Int
     , location : LocationType
     , missions : List Mission
+    , agencies : List Agency
     }
 
 
@@ -64,4 +65,16 @@ type alias LocationType =
     { id : Int
     , name : String
     , countryCode : String
+    }
+
+
+type alias Agency =
+    { id : Int
+    , name : String
+    , abbrev : String
+    , countryCode :
+        String
+        -- , type : Int
+    , infoUrl : String
+    , wikiUrl : String
     }

@@ -2,7 +2,6 @@ module Components.DateHelpers exposing (..)
 
 import Date exposing (fromTime, Date)
 import Date.Extra as Date exposing (..)
-import Time exposing (Time)
 
 
 stringFromTime : String -> Float -> String
@@ -39,7 +38,7 @@ launchWindow start end =
         endTime =
             stringFromTime "h:mm a" (end * 1000)
     in
-        startTime ++ " - " ++ endTime
+        startTime ++ " ~ " ++ endTime
 
 
 launchTime : String -> String

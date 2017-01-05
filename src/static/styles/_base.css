@@ -41,7 +41,7 @@ button {
   display: inline-block;
   cursor: pointer;
   padding: 10px 2rem;
-  /*text-transform: uppercase;*/
+  margin: 0 5px;
   &:hover {
     border-color: $textColor;
     color: $textColor;

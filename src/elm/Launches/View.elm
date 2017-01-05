@@ -20,7 +20,10 @@ launchView model launch =
             div [] [ text copy.loading ]
 
         Failure e ->
-            div [] [ text copy.launchesError ]
+            Debug.log (toString e)
+                div
+                []
+                [ text copy.launchesError ]
 
         Success data ->
             LaunchesItem.view model.menu launch

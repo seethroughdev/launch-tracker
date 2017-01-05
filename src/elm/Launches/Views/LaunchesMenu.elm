@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Launches.Models exposing (..)
 import Launches.Messages exposing (Msg(..))
+import Launches.Views.LaunchesAgencies as LaunchesAgencies exposing (view)
 
 
 renderMain : Launch -> Html Msg
@@ -19,7 +20,7 @@ renderAgencies : Launch -> Html Msg
 renderAgencies launch =
     div []
         [ h4 [] [ text "Agencies" ]
-        , p [] [ text "This is the agencies" ]
+        , LaunchesAgencies.view launch
         ]
 
 

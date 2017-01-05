@@ -2,8 +2,9 @@
 
 $backgroundColor: #333;
 $textColor: #fafafa;
-$primaryColor: #38C0FF;
-$secondaryColor: #ff4e4e;
+$primaryColor : #fafafa;
+$secondary: #38C0FF;
+$tertiary: #73FF4E;
 $buttonBg: rgba(255, 255, 255, .03);
 $primaryBg: rgba(56, 192, 255, .03);
 

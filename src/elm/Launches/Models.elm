@@ -11,14 +11,6 @@ type alias LaunchId =
     Int
 
 
-initLocation : LocationType
-initLocation =
-    { id = 0
-    , name = ""
-    , countryCode = ""
-    }
-
-
 type alias Launches =
     { data : WebData (List Launch)
     , currentLaunch : Maybe Launch
@@ -64,4 +56,26 @@ type alias LocationType =
     { id : Int
     , name : String
     , countryCode : String
+    , pads : List Pad
+    }
+
+
+type alias Agency =
+    { id : Int
+    , name : String
+    , abbrev : String
+    , countryCode :
+        String
+        -- , type : Int
+    , infoURL : String
+    , wikiURL : String
+    }
+
+
+type alias Pad =
+    { id : Int
+    , name : String
+    , infoURL : String
+    , wikiURL : String
+    , agencies : List Agency
     }

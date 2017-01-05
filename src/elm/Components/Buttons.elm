@@ -39,8 +39,9 @@ getBtnSize : BtnSize -> List ( String, String )
 getBtnSize size =
     case size of
         Small ->
-            [ ( "fontSize", "0.8rem" )
+            [ ( "fontSize", "0.75rem" )
             , ( "lineHeight", "1.5" )
+            , ( "padding", "5px 10px" )
             ]
 
         Large ->
@@ -58,6 +59,11 @@ getBtnIntent intent =
         Secondary ->
             [ ( "borderColor", "#38C0FF" )
             , ( "color", "#38C0FF" )
+            ]
+
+        Tertiary ->
+            [ ( "borderColor", "#73FF4E" )
+            , ( "color", "#73FF4E" )
             ]
 
         _ ->

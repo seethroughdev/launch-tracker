@@ -1,54 +1,47 @@
 module Components.DateHelpers exposing (..)
 
-import Date exposing (fromTime)
+import Date exposing (fromTime, Date)
 import Date.Extra as Date exposing (..)
-import Components.Copy exposing (copy)
-import Html exposing (..)
+import Time exposing (Time)
 
 
-getDateString : String -> String -> String
-getDateString template d =
-    case fromIsoString d of
+stringFromTime : String -> Float -> String
+stringFromTime template time =
+    toFormattedString template (Date.fromTime time)
+
+
+stringFromDate : String -> String -> String
+stringFromDate template date =
+    case fromIsoString date of
         Nothing ->
             "No date"
 
-        Just dateString ->
-            let
-                formattedDate =
-                    dateString
-                        |> toFormattedString template
-            in
-                formattedDate
+        Just d ->
+            toFormattedString template d
 
 
 dateHeading : String -> String
 dateHeading d =
-    getDateString "MMM d" d
+    stringFromDate "MMM d" d
 
 
 launchDate : String -> String
 launchDate d =
-    getDateString "EEEE, MMMM d, y 'at' h:mm a" d
+    stringFromDate "EEEE, MMMM d, y 'at' h:mm a" d
 
 
-launchWindow : Float -> Float -> Html msg
+launchWindow : Float -> Float -> String
 launchWindow start end =
-    if start == end then
-        span [] [ text copy.noLaunchWindow ]
-    else
-        let
-            startTime =
-                Date.fromTime (start * 1000)
+    let
+        startTime =
+            stringFromTime "h:mm a" (start * 1000)
 
-            endTime =
-                Date.fromTime (end * 1000)
-
-            w =
-                Date.diff Minute startTime endTime
-        in
-            span [] [ text ("Window ~" ++ (toString w) ++ " min") ]
+        endTime =
+            stringFromTime "h:mm a" (end * 1000)
+    in
+        startTime ++ " - " ++ endTime
 
 
 launchTime : String -> String
-launchTime d =
-    getDateString "h:mm a" d
+launchTime date =
+    stringFromDate "h:mm a" date

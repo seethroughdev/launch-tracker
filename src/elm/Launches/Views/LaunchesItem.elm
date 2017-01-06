@@ -69,11 +69,6 @@ alarmButton l =
         Nothing
 
 
-renderMissionDescriptions : Mission -> Html Msg
-renderMissionDescriptions mission =
-    li [] [ text mission.description ]
-
-
 view : LaunchMenu -> Maybe Launch -> Html Msg
 view menu launch =
     case launch of
@@ -88,8 +83,6 @@ view menu launch =
                 , h1 [] [ text l.name ]
                 , p [] [ Button.view (alarmButton l) ]
                 , LaunchesMenu.view menu l
-                , ul []
-                    (List.map renderMissionDescriptions l.missions)
                 , Button.view watchButton
                 , hr [] []
                 , p [] [ text (toString launch) ]

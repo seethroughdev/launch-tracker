@@ -8,11 +8,17 @@ import Launches.Messages exposing (Msg(..))
 import Launches.Views.LaunchesAgencies as LaunchesAgencies exposing (view)
 
 
+renderMissionDescriptions : Mission -> Html Msg
+renderMissionDescriptions mission =
+    li [] [ text mission.description ]
+
+
 renderMain : Launch -> Html Msg
 renderMain launch =
     div []
         [ h4 [] [ text "Main" ]
-        , p [] [ text "This is the main" ]
+        , ul []
+            (List.map renderMissionDescriptions launch.missions)
         ]
 
 

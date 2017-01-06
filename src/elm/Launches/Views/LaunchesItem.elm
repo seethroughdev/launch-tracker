@@ -16,6 +16,7 @@ prevButton launch =
         Button.Small
         Button.Secondary
         Button.Noop
+        False
         Nothing
         (Just (ShowPrevLaunch launch.id))
 
@@ -27,6 +28,7 @@ nextButton launch =
         Button.Small
         Button.Secondary
         Button.Noop
+        False
         Nothing
         (Just (ShowNextLaunch launch.id))
 
@@ -39,15 +41,38 @@ renderButtonNav launch =
         ]
 
 
-watchButton : Btn msg
-watchButton =
-    Btn
-        copy.watchLaunch
-        Button.Large
-        Button.Primary
-        Button.Watch
-        Nothing
-        Nothing
+getWatchLink : List String -> String
+getWatchLink urls =
+    case List.head urls of
+        Nothing ->
+            ""
+
+        Just url ->
+            url
+
+
+isDisabled : String -> Bool
+isDisabled val =
+    if val == "" then
+        True
+    else
+        False
+
+
+watchButton : Launch -> Btn msg
+watchButton l =
+    let
+        vidUrl =
+            getWatchLink l.vidURLs
+    in
+        Btn
+            copy.watchLaunch
+            Button.Large
+            Button.Primary
+            Button.Watch
+            (isDisabled vidUrl)
+            (Just vidUrl)
+            Nothing
 
 
 getAlarmText : Launch -> String
@@ -65,6 +90,7 @@ alarmButton l =
         Button.Small
         Button.Secondary
         Button.Alarm
+        False
         Nothing
         Nothing
 
@@ -83,7 +109,7 @@ view menu launch =
                 , h1 [] [ text l.name ]
                 , p [] [ Button.view (alarmButton l) ]
                 , LaunchesMenu.view menu l
-                , Button.view watchButton
+                , Button.viewHref (watchButton l)
                 , hr [] []
                 , p [] [ text (toString launch) ]
                 ]

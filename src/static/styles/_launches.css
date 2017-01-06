@@ -15,3 +15,10 @@ ul.launchesList {
     }
   }
 }
+
+.launchMenuContainer {
+}
+
+ul.agenciesList {
+  list-style-type: none;
+}

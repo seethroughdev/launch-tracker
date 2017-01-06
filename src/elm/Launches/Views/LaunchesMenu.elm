@@ -97,5 +97,7 @@ view : LaunchMenu -> Launch -> Html Msg
 view currentMenu launch =
     div []
         [ renderNav currentMenu
-        , renderContainer currentMenu launch
+        , div [ class "launchMenuContainer" ]
+            [ renderContainer currentMenu launch
+            ]
         ]

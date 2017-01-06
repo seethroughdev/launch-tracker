@@ -17,12 +17,14 @@ buttonGroup a =
         Button.Small
         Button.Tertiary
         Button.Noop
+        (Just a.infoURL)
         Nothing
     , Btn
         "Wiki"
         Button.Small
         Button.Tertiary
         Button.Noop
+        (Just a.wikiURL)
         Nothing
     ]
 
@@ -34,7 +36,7 @@ renderAgency a =
         []
         [ h5 [] [ text a.name ]
         , ul []
-            (List.map Button.view (buttonGroup a))
+            (List.map Button.viewHref (buttonGroup a))
         ]
 
 

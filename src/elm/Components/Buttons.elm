@@ -1,7 +1,7 @@
 module Components.Buttons exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, style)
+import Html.Attributes exposing (class, style, href)
 import Html.Events exposing (onClick)
 
 
@@ -31,6 +31,7 @@ type alias Btn msg =
     , size : BtnSize
     , intent : BtnIntent
     , icon : BtnIcon
+    , href : Maybe String
     , cb : Maybe msg
     }
 
@@ -75,6 +76,25 @@ buttonStyle btn =
     [ getBtnSize btn.size
     , getBtnIntent btn.intent
     ]
+
+
+viewHref : Btn msg -> Html msg
+viewHref btn =
+    case btn.href of
+        Nothing ->
+            a
+                [ class "button"
+                , style <| List.concat (buttonStyle btn)
+                ]
+                [ text btn.text ]
+
+        Just str ->
+            a
+                [ class "button"
+                , href str
+                , style <| List.concat (buttonStyle btn)
+                ]
+                [ text btn.text ]
 
 
 view : Btn msg -> Html msg

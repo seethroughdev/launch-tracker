@@ -16,6 +16,7 @@ prevButton launch =
         Button.Small
         Button.Secondary
         Button.Noop
+        Nothing
         (Just (ShowPrevLaunch launch.id))
 
 
@@ -26,6 +27,7 @@ nextButton launch =
         Button.Small
         Button.Secondary
         Button.Noop
+        Nothing
         (Just (ShowNextLaunch launch.id))
 
 
@@ -45,6 +47,7 @@ watchButton =
         Button.Primary
         Button.Watch
         Nothing
+        Nothing
 
 
 getAlarmText : Launch -> String
@@ -62,6 +65,7 @@ alarmButton l =
         Button.Small
         Button.Secondary
         Button.Alarm
+        Nothing
         Nothing
 
 

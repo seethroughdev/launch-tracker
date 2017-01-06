@@ -45,6 +45,7 @@ launchDecoder =
         |> required "status" int
         |> required "location" locationDecoder
         |> optional "missions" (list missionDecoder) []
+        |> required "vidURLs" (list string)
 
 
 missionDecoder : Json.Decoder Mission
@@ -68,7 +69,7 @@ padDecoder =
         |> required "id" int
         |> required "name" string
         |> optional "infoURL" string ""
-        |> required "wikiURL" string
+        |> optional "wikiURL" string ""
         |> optional "agencies" (list agencyDecoder) []
 
 
@@ -79,8 +80,8 @@ agencyDecoder =
         |> required "name" string
         |> required "abbrev" string
         |> required "countryCode" string
-        |> required "infoURL" string
-        |> required "wikiURL" string
+        |> optional "infoURL" string ""
+        |> optional "wikiURL" string ""
 
 
 

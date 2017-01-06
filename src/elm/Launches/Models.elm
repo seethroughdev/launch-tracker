@@ -44,6 +44,7 @@ type alias Launch =
     , status : Int
     , location : LocationType
     , missions : List Mission
+    , vidURLs : List String
     }
 
 

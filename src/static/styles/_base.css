@@ -34,7 +34,7 @@ hr {
   margin: 2rem auto;
 }
 
-button {
+button, a.button, span.button {
   background: $buttonBg;
   border: 1px solid #c7c7c7;
   color: $textColor;
@@ -42,6 +42,8 @@ button {
   cursor: pointer;
   padding: 10px 2rem;
   margin: 0 5px;
+  text-decoration: none;
+  user-select: none;
   &:hover {
     border-color: $textColor;
     color: $textColor;
@@ -50,5 +52,15 @@ button {
   &:focus {
     background: rgba(255, 255, 255, .1);
     outline: none;
+  }
+  &:disabled, &.disabled {
+    border-color: $grey !important;
+    color: $grey !important;
+    cursor: default;
+    &:hover {
+      border-color: $grey !important;
+      color: $grey !important;
+      background: $buttonBg !important;
+    }
   }
 }

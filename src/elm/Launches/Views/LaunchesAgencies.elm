@@ -10,6 +10,20 @@ import Launches.Models exposing (Launch, Agency)
 import Components.Buttons as Button exposing (Btn)
 
 
+isDisabled : String -> Bool
+isDisabled val =
+    val == ""
+
+
+
+-- case val of
+--     Nothing ->
+--         False
+--
+--     Just a ->
+--         True
+
+
 buttonGroup : Agency -> List (Btn msg)
 buttonGroup a =
     [ Btn
@@ -17,12 +31,16 @@ buttonGroup a =
         Button.Small
         Button.Tertiary
         Button.Noop
+        (isDisabled a.infoURL)
+        (Just a.infoURL)
         Nothing
     , Btn
         "Wiki"
         Button.Small
         Button.Tertiary
         Button.Noop
+        (isDisabled a.wikiURL)
+        (Just a.wikiURL)
         Nothing
     ]
 
@@ -34,7 +52,7 @@ renderAgency a =
         []
         [ h5 [] [ text a.name ]
         , ul []
-            (List.map Button.view (buttonGroup a))
+            (List.map Button.viewHref (buttonGroup a))
         ]
 
 

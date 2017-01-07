@@ -7,6 +7,7 @@ import Launches.Models exposing (..)
 import Launches.Messages exposing (Msg(..))
 import Launches.Views.LaunchesAgencies as LaunchesAgencies exposing (view)
 import Launches.Views.LaunchesRocket as LaunchesRocket exposing (view)
+import Regex exposing (..)
 
 
 renderMissionDescriptions : Mission -> Html Msg
@@ -73,11 +74,15 @@ isActiveClass current el =
 
 getNavItem : LaunchMenu -> LaunchMenu -> Html Msg
 getNavItem currentMenu menu =
-    li
-        [ class (isActiveClass currentMenu menu)
-        , onClick (ChangeMenu menu)
-        ]
-        [ text (toString menu) ]
+    let
+        navName =
+            replace All (regex "Menu$") (\_ -> "") (toString menu)
+    in
+        li
+            [ class (isActiveClass currentMenu menu)
+            , onClick (ChangeMenu menu)
+            ]
+            [ text navName ]
 
 
 renderNav : LaunchMenu -> Html Msg

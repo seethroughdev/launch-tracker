@@ -3,7 +3,7 @@ module Launches.Commands exposing (..)
 import Http
 import Json.Decode as Json exposing (..)
 import Json.Decode.Pipeline exposing (decode, required, optional, requiredAt)
-import Launches.Models exposing (Mission, Launch, LocationType, Agency, Pad)
+import Launches.Models exposing (Mission, Launch, Location, Agency, Pad, Rocket)
 import RemoteData
 
 
@@ -46,6 +46,7 @@ launchDecoder =
         |> required "location" locationDecoder
         |> optional "missions" (list missionDecoder) []
         |> required "vidURLs" (list string)
+        |> required "rocket" rocketDecoder
 
 
 missionDecoder : Json.Decoder Mission
@@ -54,9 +55,9 @@ missionDecoder =
         |> required "description" string
 
 
-locationDecoder : Json.Decoder LocationType
+locationDecoder : Json.Decoder Location
 locationDecoder =
-    decode LocationType
+    decode Location
         |> required "id" int
         |> required "name" string
         |> required "countryCode" string
@@ -82,6 +83,20 @@ agencyDecoder =
         |> required "countryCode" string
         |> optional "infoURL" string ""
         |> optional "wikiURL" string ""
+
+
+rocketDecoder : Json.Decoder Rocket
+rocketDecoder =
+    decode Rocket
+        |> required "id" int
+        |> required "name" string
+        |> required "configuration" string
+        |> required "familyname" string
+        |> optional "agencies" (list agencyDecoder) []
+        |> required "wikiURL" string
+        |> optional "infoURL" string ""
+        |> required "imageSizes" (list int)
+        |> required "imageURL" string
 
 
 

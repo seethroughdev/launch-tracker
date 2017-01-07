@@ -21,14 +21,14 @@ type alias Launches =
 
 initLaunches : Launches
 initLaunches =
-    Launches Loading Nothing "" Main
+    Launches Loading Nothing "" MainMenu
 
 
 type LaunchMenu
-    = Main
-    | Agencies
-    | Rocket
-    | Location
+    = MainMenu
+    | AgenciesMenu
+    | RocketMenu
+    | LocationMenu
 
 
 
@@ -42,9 +42,10 @@ type alias Launch =
     , westamp : Float
     , isoStart : String
     , status : Int
-    , location : LocationType
+    , location : Location
     , missions : List Mission
     , vidURLs : List String
+    , rocket : Rocket
     }
 
 
@@ -53,7 +54,7 @@ type alias Mission =
     }
 
 
-type alias LocationType =
+type alias Location =
     { id : Int
     , name : String
     , countryCode : String
@@ -79,4 +80,17 @@ type alias Pad =
     , infoURL : String
     , wikiURL : String
     , agencies : List Agency
+    }
+
+
+type alias Rocket =
+    { id : Int
+    , name : String
+    , configuration : String
+    , familyname : String
+    , agencies : List Agency
+    , wikiURL : String
+    , infoURL : String
+    , imageSizes : List Int
+    , imageURL : String
     }

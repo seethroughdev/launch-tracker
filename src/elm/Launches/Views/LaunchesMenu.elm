@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Launches.Models exposing (..)
 import Launches.Messages exposing (Msg(..))
 import Launches.Views.LaunchesAgencies as LaunchesAgencies exposing (view)
+import Launches.Views.LaunchesRocket as LaunchesRocket exposing (view)
 
 
 renderMissionDescriptions : Mission -> Html Msg
@@ -34,7 +35,7 @@ renderRocket : Launch -> Html Msg
 renderRocket launch =
     div []
         [ h4 [] [ text "Rocket" ]
-        , p [] [ text "This is the rocket" ]
+        , LaunchesRocket.view launch
         ]
 
 
@@ -49,16 +50,16 @@ renderLocation launch =
 renderContainer : LaunchMenu -> Launch -> Html Msg
 renderContainer launchMenu launch =
     case launchMenu of
-        Main ->
+        MainMenu ->
             renderMain launch
 
-        Agencies ->
+        AgenciesMenu ->
             renderAgencies launch
 
-        Rocket ->
+        RocketMenu ->
             renderRocket launch
 
-        Location ->
+        LocationMenu ->
             renderLocation launch
 
 
@@ -86,10 +87,10 @@ renderNav currentMenu =
             getNavItem currentMenu menu
     in
         ul [ class "launchMenu horizontalMenu" ]
-            [ renderNavItem Main
-            , renderNavItem Agencies
-            , renderNavItem Rocket
-            , renderNavItem Location
+            [ renderNavItem MainMenu
+            , renderNavItem AgenciesMenu
+            , renderNavItem RocketMenu
+            , renderNavItem LocationMenu
             ]
 
 

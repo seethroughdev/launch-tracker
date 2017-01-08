@@ -5,7 +5,7 @@ ul.launchesList {
   & li {
     padding-top: 1.5rem;
     padding-bottom: .5rem;
-    border-bottom: 1px solid #777;
+    border-bottom: 1px solid #3a3a3a;
     cursor: pointer;
     & h4 {
       margin: 0;

@@ -111,5 +111,5 @@ view menu launch =
                 , LaunchesMenu.view menu l
                 , Button.viewHref (watchButton l)
                 , hr [] []
-                , p [] [ text (toString launch) ]
+                  -- , p [] [ text (toString launch) ]
                 ]

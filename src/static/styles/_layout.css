@@ -1,24 +1,32 @@
 .mainContainer {
   lost-utility: clearfix;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 aside.aside {
   padding: 2rem;
+  & > div {
+    margin: 0 auto;
+  }
   @media tablet {
     lost-column: 1/4
   }
 }
 
 main.main {
-  padding: 2rem;
   text-align: center;
-  lost-center: middle-center;
+  min-height: 100vh;
+  padding-top: 5%;
   & > div {
     max-width: $medium;
     margin: 0 auto;
   }
   @media tablet {
-    lost-column: 3/4
+    lost-column: 3/4;
   }
+}
+
+.content {
+  overflow: scroll;
+  height: 100vh;
 }

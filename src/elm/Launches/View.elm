@@ -56,13 +56,14 @@ view : Launches -> Maybe Launch -> Html Msg
 view model launch =
     div [ class "mainContainer" ]
         [ aside [ class "aside" ]
-            [ h3 [] [ text copy.launchesList ]
-            , ul [ class "launchesList" ]
-                (listView model launch)
+            [ div [ class "content" ]
+                [ h3 [] [ text copy.launchesList ]
+                , ul [ class "launchesList" ]
+                    (listView model launch)
+                ]
             ]
         , main_ [ class "main" ]
-            [ div
-                []
+            [ div [ class "content" ]
                 [ h4 [] [ text "Launch" ]
                 , (launchView model launch)
                 ]

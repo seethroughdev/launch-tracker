@@ -1,24 +1,59 @@
+@lost gutter 0px;
+
 .mainContainer {
   lost-utility: clearfix;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 aside.aside {
   padding: 2rem;
-  @media tablet {
+  & > div {
+    margin: 0 auto;
+  }
+  @media mobile {
     lost-column: 1/4
+  }
+  @media tablet {
+    lost-column: 1/3
   }
 }
 
 main.main {
-  padding: 2rem;
   text-align: center;
-  lost-center: middle-center;
+  min-height: 100vh;
+  padding-top: 5%;
+  background: #555;
   & > div {
-    max-width: $medium;
     margin: 0 auto;
+    max-width: $medium;
+  }
+  @media mobile {
+    lost-column: 3/4;
   }
   @media tablet {
-    lost-column: 3/4
+    lost-column: 2/3;
+  }
+}
+
+.content {
+  overflow: scroll;
+  height: 100vh;
+}
+
+footer.footer {
+  background: #222;
+  bottom: 0;
+  right: 0;
+  height: $footerHeight;
+  line-height: $footerHeight;
+  text-align: center;
+  @media mobile {
+    lost-column: 3/4;
+    left: 25%;
+    position: fixed;
+  }
+  @media tablet {
+    left: 33.3%;
+    lost-column: 2/3;
   }
 }

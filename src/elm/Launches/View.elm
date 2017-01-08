@@ -54,18 +54,23 @@ listView model currentLaunch =
 
 view : Launches -> Maybe Launch -> Html Msg
 view model launch =
-    div [ class "mainContainer" ]
-        [ aside [ class "aside" ]
-            [ div [ class "content" ]
-                [ h3 [] [ text copy.launchesList ]
-                , ul [ class "launchesList" ]
-                    (listView model launch)
+    div [ class "body" ]
+        [ div [ class "mainContainer" ]
+            [ aside [ class "aside" ]
+                [ div [ class "content" ]
+                    [ h3 [] [ text copy.launchesList ]
+                    , ul [ class "launchesList" ]
+                        (listView model launch)
+                    ]
                 ]
-            ]
-        , main_ [ class "main" ]
-            [ div [ class "content" ]
-                [ h4 [] [ text "Launch" ]
-                , (launchView model launch)
+            , main_ [ class "main" ]
+                [ div [ class "content" ]
+                    [ h4 [] [ text "Launch" ]
+                    , (launchView model launch)
+                    ]
+                , footer [ class "footer" ]
+                    [ text "This is the footer"
+                    ]
                 ]
             ]
         ]

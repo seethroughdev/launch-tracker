@@ -112,12 +112,4 @@ view menu launch =
                 , Button.viewHref (watchButton l)
                 , hr [] []
                 , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
-                , p [] [ text (toString launch) ]
                 ]

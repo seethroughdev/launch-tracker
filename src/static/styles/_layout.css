@@ -6,7 +6,6 @@
 }
 
 aside.aside {
-  padding: 2rem;
   @media mobile {
     lost-column: 1/4
   }
@@ -21,9 +20,6 @@ main.main {
   overflow: hidden;
   background: #555;
   padding-top: $footerHeight;
-  & .content {
-    padding: 2rem;
-  }
   & > div {
     & > * {
       max-width: $medium;
@@ -42,6 +38,7 @@ main.main {
   margin: 0 auto;
   overflow: scroll;
   height: 100vh;
+  padding: 2rem;
 }
 
 header.header {

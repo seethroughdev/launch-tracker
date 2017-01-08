@@ -7,9 +7,6 @@
 
 aside.aside {
   padding: 2rem;
-  & > div {
-    margin: 0 auto;
-  }
   @media mobile {
     lost-column: 1/4
   }
@@ -20,12 +17,18 @@ aside.aside {
 
 main.main {
   text-align: center;
-  min-height: 100vh;
-  padding-top: 5%;
+  height: 100vh;
+  overflow: hidden;
   background: #555;
+  padding-top: $footerHeight;
+  & .content {
+    padding: 2rem;
+  }
   & > div {
-    margin: 0 auto;
-    max-width: $medium;
+    & > * {
+      max-width: $medium;
+      margin: 0 auto;
+    }
   }
   @media mobile {
     lost-column: 3/4;
@@ -36,8 +39,27 @@ main.main {
 }
 
 .content {
+  margin: 0 auto;
   overflow: scroll;
   height: 100vh;
+}
+
+header.header {
+  background: #252525;
+  top: 0;
+  right: 0;
+  height: $footerHeight;
+  line-height: $footerHeight;
+  text-align: center;
+  @media mobile {
+    lost-column: 3/4;
+    left: 25%;
+    position: fixed;
+  }
+  @media tablet {
+    left: 33.3%;
+    lost-column: 2/3;
+  }
 }
 
 footer.footer {

@@ -18,7 +18,7 @@ main.main {
   text-align: center;
   height: 100vh;
   overflow: hidden;
-  background: #555;
+  background: #444;
   padding-top: $footerHeight;
   & > div {
     & > * {

@@ -64,9 +64,11 @@ view model launch =
                     ]
                 ]
             , main_ [ class "main" ]
-                [ div [ class "content" ]
-                    [ h4 [] [ text "Launch" ]
-                    , (launchView model launch)
+                [ header [ class "header" ]
+                    [ text "This is the header"
+                    ]
+                , div [ class "content" ]
+                    [ (launchView model launch)
                     ]
                 , footer [ class "footer" ]
                     [ text "This is the footer"

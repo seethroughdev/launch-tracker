@@ -6,10 +6,7 @@
 }
 
 aside.aside {
-  padding: 2rem;
-  & > div {
-    margin: 0 auto;
-  }
+  overflow: hidden;
   @media mobile {
     lost-column: 1/4
   }
@@ -20,12 +17,15 @@ aside.aside {
 
 main.main {
   text-align: center;
-  min-height: 100vh;
-  padding-top: 5%;
-  background: #555;
+  height: 100vh;
+  overflow: hidden;
+  background: #444;
+  padding-top: $footerHeight;
   & > div {
-    margin: 0 auto;
-    max-width: $medium;
+    & > * {
+      max-width: $medium;
+      margin: 0 auto;
+    }
   }
   @media mobile {
     lost-column: 3/4;
@@ -36,8 +36,30 @@ main.main {
 }
 
 .content {
-  overflow: scroll;
+  margin: 0 auto;
+  overflow-y: scroll;
   height: 100vh;
+  padding: 1rem 2rem 1rem 1rem;
+  position: relative;
+  right: -18px;
+}
+
+header.header {
+  background: #252525;
+  top: 0;
+  right: 0;
+  height: $footerHeight;
+  line-height: $footerHeight;
+  text-align: center;
+  @media mobile {
+    lost-column: 3/4;
+    left: 25%;
+    position: fixed;
+  }
+  @media tablet {
+    left: 33.3%;
+    lost-column: 2/3;
+  }
 }
 
 footer.footer {

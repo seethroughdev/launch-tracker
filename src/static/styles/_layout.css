@@ -6,6 +6,7 @@
 }
 
 aside.aside {
+  overflow: hidden;
   @media mobile {
     lost-column: 1/4
   }
@@ -36,9 +37,11 @@ main.main {
 
 .content {
   margin: 0 auto;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 100vh;
-  padding: 2rem;
+  padding: 1rem 2rem 1rem 1rem;
+  position: relative;
+  right: -18px;
 }
 
 header.header {
